@@ -1,5 +1,5 @@
 "use client";
-
+import "../index.css";
 import { useState } from "react";
 
 export const ButtonLikes = () => {
@@ -7,5 +7,9 @@ export const ButtonLikes = () => {
   function handleClick() {
     setLikes(likes + 1);
   }
-  return <button onClick={handleClick}>Like ({likes})</button>;
+  return (
+    <button className="rounded-sm bg-pink" onClick={handleClick}>
+      Like ({likes})
+    </button>
+  );
 };

@@ -89,6 +89,171 @@ module.exports = require("next/dist/compiled/next-server/app-page.runtime.dev.js
 
 /***/ }),
 
+/***/ "crypto":
+/*!*************************!*\
+  !*** external "crypto" ***!
+  \*************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("crypto");
+
+/***/ }),
+
+/***/ "dns":
+/*!**********************!*\
+  !*** external "dns" ***!
+  \**********************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("dns");
+
+/***/ }),
+
+/***/ "events":
+/*!*************************!*\
+  !*** external "events" ***!
+  \*************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("events");
+
+/***/ }),
+
+/***/ "fs":
+/*!*********************!*\
+  !*** external "fs" ***!
+  \*********************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("fs");
+
+/***/ }),
+
+/***/ "http":
+/*!***********************!*\
+  !*** external "http" ***!
+  \***********************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("http");
+
+/***/ }),
+
+/***/ "http2":
+/*!************************!*\
+  !*** external "http2" ***!
+  \************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("http2");
+
+/***/ }),
+
+/***/ "net":
+/*!**********************!*\
+  !*** external "net" ***!
+  \**********************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("net");
+
+/***/ }),
+
+/***/ "os":
+/*!*********************!*\
+  !*** external "os" ***!
+  \*********************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("os");
+
+/***/ }),
+
+/***/ "path":
+/*!***********************!*\
+  !*** external "path" ***!
+  \***********************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("path");
+
+/***/ }),
+
+/***/ "process":
+/*!**************************!*\
+  !*** external "process" ***!
+  \**************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("process");
+
+/***/ }),
+
+/***/ "stream":
+/*!*************************!*\
+  !*** external "stream" ***!
+  \*************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("stream");
+
+/***/ }),
+
+/***/ "tls":
+/*!**********************!*\
+  !*** external "tls" ***!
+  \**********************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("tls");
+
+/***/ }),
+
+/***/ "url":
+/*!**********************!*\
+  !*** external "url" ***!
+  \**********************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("url");
+
+/***/ }),
+
+/***/ "util":
+/*!***********************!*\
+  !*** external "util" ***!
+  \***********************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("util");
+
+/***/ }),
+
+/***/ "zlib":
+/*!***********************!*\
+  !*** external "zlib" ***!
+  \***********************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("zlib");
+
+/***/ }),
+
 /***/ "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-app-loader.js?name=app%2Fpage&page=%2Fpage&appPaths=%2Fpage&pagePath=private-next-app-dir%2Fpage.js&appDir=%2FUsers%2Fnguyenduy%2FDocuments%2FWork%20and%20study%2Fstudy%2Fpocket%2Fsrc%2Fapp&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&rootDir=%2FUsers%2Fnguyenduy%2FDocuments%2FWork%20and%20study%2Fstudy%2Fpocket&isDev=true&tsconfigPath=tsconfig.json&basePath=&assetPrefix=&nextConfigOutput=&preferredRegion=&middlewareConfig=e30%3D!":
 /*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/next/dist/build/webpack/loaders/next-app-loader.js?name=app%2Fpage&page=%2Fpage&appPaths=%2Fpage&pagePath=private-next-app-dir%2Fpage.js&appDir=%2FUsers%2Fnguyenduy%2FDocuments%2FWork%20and%20study%2Fstudy%2Fpocket%2Fsrc%2Fapp&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&rootDir=%2FUsers%2Fnguyenduy%2FDocuments%2FWork%20and%20study%2Fstudy%2Fpocket&isDev=true&tsconfigPath=tsconfig.json&basePath=&assetPrefix=&nextConfigOutput=&preferredRegion=&middlewareConfig=e30%3D! ***!
@@ -137,7 +302,18 @@ eval("Promise.resolve(/*! import() eager */).then(__webpack_require__.bind(__web
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   ButtonLikes: () => (/* binding */ ButtonLikes)\n/* harmony export */ });\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-dev-runtime */ \"(ssr)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/ssr/react-jsx-dev-runtime.js\");\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ \"(ssr)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/ssr/react.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);\n/* __next_internal_client_entry_do_not_use__ ButtonLikes auto */ \n\nconst ButtonLikes = ()=>{\n    const [likes, setLikes] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);\n    function handleClick() {\n        setLikes(likes + 1);\n    }\n    return /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"button\", {\n        onClick: handleClick,\n        children: [\n            \"Like (\",\n            likes,\n            \")\"\n        ]\n    }, void 0, true, {\n        fileName: \"/Users/nguyenduy/Documents/Work and study/study/pocket/src/Components/ButtonLikes.tsx\",\n        lineNumber: 10,\n        columnNumber: 10\n    }, undefined);\n};\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKHNzcikvLi9zcmMvQ29tcG9uZW50cy9CdXR0b25MaWtlcy50c3giLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7O0FBRWlDO0FBRTFCLE1BQU1DLGNBQWM7SUFDekIsTUFBTSxDQUFDQyxPQUFPQyxTQUFTLEdBQUdILCtDQUFRQSxDQUFDO0lBQ25DLFNBQVNJO1FBQ1BELFNBQVNELFFBQVE7SUFDbkI7SUFDQSxxQkFBTyw4REFBQ0c7UUFBT0MsU0FBU0Y7O1lBQWE7WUFBT0Y7WUFBTTs7Ozs7OztBQUNwRCxFQUFFIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vcG9ja2V0Ly4vc3JjL0NvbXBvbmVudHMvQnV0dG9uTGlrZXMudHN4Pzg3NzEiXSwic291cmNlc0NvbnRlbnQiOlsiXCJ1c2UgY2xpZW50XCI7XG5cbmltcG9ydCB7IHVzZVN0YXRlIH0gZnJvbSBcInJlYWN0XCI7XG5cbmV4cG9ydCBjb25zdCBCdXR0b25MaWtlcyA9ICgpID0+IHtcbiAgY29uc3QgW2xpa2VzLCBzZXRMaWtlc10gPSB1c2VTdGF0ZSgwKTtcbiAgZnVuY3Rpb24gaGFuZGxlQ2xpY2soKSB7XG4gICAgc2V0TGlrZXMobGlrZXMgKyAxKTtcbiAgfVxuICByZXR1cm4gPGJ1dHRvbiBvbkNsaWNrPXtoYW5kbGVDbGlja30+TGlrZSAoe2xpa2VzfSk8L2J1dHRvbj47XG59O1xuIl0sIm5hbWVzIjpbInVzZVN0YXRlIiwiQnV0dG9uTGlrZXMiLCJsaWtlcyIsInNldExpa2VzIiwiaGFuZGxlQ2xpY2siLCJidXR0b24iLCJvbkNsaWNrIl0sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///(ssr)/./src/Components/ButtonLikes.tsx\n");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   ButtonLikes: () => (/* binding */ ButtonLikes)\n/* harmony export */ });\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-dev-runtime */ \"(ssr)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/ssr/react-jsx-dev-runtime.js\");\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../index.css */ \"(ssr)/./src/index.css\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ \"(ssr)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/ssr/react.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);\n/* __next_internal_client_entry_do_not_use__ ButtonLikes auto */ \n\n\nconst ButtonLikes = ()=>{\n    const [likes, setLikes] = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(0);\n    function handleClick() {\n        setLikes(likes + 1);\n    }\n    return /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"button\", {\n        className: \"rounded-sm bg-pink\",\n        onClick: handleClick,\n        children: [\n            \"Like (\",\n            likes,\n            \")\"\n        ]\n    }, void 0, true, {\n        fileName: \"/Users/nguyenduy/Documents/Work and study/study/pocket/src/Components/ButtonLikes.tsx\",\n        lineNumber: 11,\n        columnNumber: 5\n    }, undefined);\n};\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKHNzcikvLi9zcmMvQ29tcG9uZW50cy9CdXR0b25MaWtlcy50c3giLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7OztBQUNzQjtBQUNXO0FBRTFCLE1BQU1DLGNBQWM7SUFDekIsTUFBTSxDQUFDQyxPQUFPQyxTQUFTLEdBQUdILCtDQUFRQSxDQUFDO0lBQ25DLFNBQVNJO1FBQ1BELFNBQVNELFFBQVE7SUFDbkI7SUFDQSxxQkFDRSw4REFBQ0c7UUFBT0MsV0FBVTtRQUFxQkMsU0FBU0g7O1lBQWE7WUFDcERGO1lBQU07Ozs7Ozs7QUFHbkIsRUFBRSIsInNvdXJjZXMiOlsid2VicGFjazovL3BvY2tldC8uL3NyYy9Db21wb25lbnRzL0J1dHRvbkxpa2VzLnRzeD84NzcxIl0sInNvdXJjZXNDb250ZW50IjpbIlwidXNlIGNsaWVudFwiO1xuaW1wb3J0IFwiLi4vaW5kZXguY3NzXCI7XG5pbXBvcnQgeyB1c2VTdGF0ZSB9IGZyb20gXCJyZWFjdFwiO1xuXG5leHBvcnQgY29uc3QgQnV0dG9uTGlrZXMgPSAoKSA9PiB7XG4gIGNvbnN0IFtsaWtlcywgc2V0TGlrZXNdID0gdXNlU3RhdGUoMCk7XG4gIGZ1bmN0aW9uIGhhbmRsZUNsaWNrKCkge1xuICAgIHNldExpa2VzKGxpa2VzICsgMSk7XG4gIH1cbiAgcmV0dXJuIChcbiAgICA8YnV0dG9uIGNsYXNzTmFtZT1cInJvdW5kZWQtc20gYmctcGlua1wiIG9uQ2xpY2s9e2hhbmRsZUNsaWNrfT5cbiAgICAgIExpa2UgKHtsaWtlc30pXG4gICAgPC9idXR0b24+XG4gICk7XG59O1xuIl0sIm5hbWVzIjpbInVzZVN0YXRlIiwiQnV0dG9uTGlrZXMiLCJsaWtlcyIsInNldExpa2VzIiwiaGFuZGxlQ2xpY2siLCJidXR0b24iLCJjbGFzc05hbWUiLCJvbkNsaWNrIl0sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///(ssr)/./src/Components/ButtonLikes.tsx\n");
+
+/***/ }),
+
+/***/ "(ssr)/./src/index.css":
+/*!***********************!*\
+  !*** ./src/index.css ***!
+  \***********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (\"b326f29cab83\");\nif (false) {}\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKHNzcikvLi9zcmMvaW5kZXguY3NzIiwibWFwcGluZ3MiOiI7Ozs7QUFBQSxpRUFBZSxjQUFjO0FBQzdCLElBQUksS0FBVSxFQUFFLEVBQXVCIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vcG9ja2V0Ly4vc3JjL2luZGV4LmNzcz9iZjBjIl0sInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCBkZWZhdWx0IFwiYjMyNmYyOWNhYjgzXCJcbmlmIChtb2R1bGUuaG90KSB7IG1vZHVsZS5ob3QuYWNjZXB0KCkgfVxuIl0sIm5hbWVzIjpbXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///(ssr)/./src/index.css\n");
 
 /***/ }),
 
@@ -186,7 +362,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ HomePage)\n/* harmony export */ });\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-dev-runtime */ \"(rsc)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/rsc/react-jsx-dev-runtime.js\");\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _Components_ButtonLikes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Components/ButtonLikes */ \"(rsc)/./src/Components/ButtonLikes.tsx\");\n\n\nfunction Header({ title }) {\n    return /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"h1\", {\n        children: title ? title : \"Default title\"\n    }, void 0, false, {\n        fileName: \"/Users/nguyenduy/Documents/Work and study/study/pocket/src/app/page.js\",\n        lineNumber: 4,\n        columnNumber: 10\n    }, this);\n}\nfunction HomePage() {\n    const names = [\n        \"Ada Lovelace\",\n        \"Grace Hopper\",\n        \"Margaret Hamilton\"\n    ];\n    return /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"div\", {\n        children: [\n            /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(Header, {\n                title: \"Develop. Preview. Ship.\"\n            }, void 0, false, {\n                fileName: \"/Users/nguyenduy/Documents/Work and study/study/pocket/src/app/page.js\",\n                lineNumber: 11,\n                columnNumber: 7\n            }, this),\n            /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"ul\", {\n                children: names.map((name)=>/*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"li\", {\n                        children: name\n                    }, name, false, {\n                        fileName: \"/Users/nguyenduy/Documents/Work and study/study/pocket/src/app/page.js\",\n                        lineNumber: 14,\n                        columnNumber: 11\n                    }, this))\n            }, void 0, false, {\n                fileName: \"/Users/nguyenduy/Documents/Work and study/study/pocket/src/app/page.js\",\n                lineNumber: 12,\n                columnNumber: 7\n            }, this),\n            /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_Components_ButtonLikes__WEBPACK_IMPORTED_MODULE_1__.ButtonLikes, {}, void 0, false, {\n                fileName: \"/Users/nguyenduy/Documents/Work and study/study/pocket/src/app/page.js\",\n                lineNumber: 17,\n                columnNumber: 7\n            }, this)\n        ]\n    }, void 0, true, {\n        fileName: \"/Users/nguyenduy/Documents/Work and study/study/pocket/src/app/page.js\",\n        lineNumber: 10,\n        columnNumber: 5\n    }, this);\n}\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKHJzYykvLi9zcmMvYXBwL3BhZ2UuanMiLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7QUFBd0Q7QUFFeEQsU0FBU0MsT0FBTyxFQUFFQyxLQUFLLEVBQUU7SUFDdkIscUJBQU8sOERBQUNDO2tCQUFJRCxRQUFRQSxRQUFROzs7Ozs7QUFDOUI7QUFFZSxTQUFTRTtJQUN0QixNQUFNQyxRQUFRO1FBQUM7UUFBZ0I7UUFBZ0I7S0FBb0I7SUFDbkUscUJBQ0UsOERBQUNDOzswQkFDQyw4REFBQ0w7Z0JBQU9DLE9BQU07Ozs7OzswQkFDZCw4REFBQ0s7MEJBQ0VGLE1BQU1HLEdBQUcsQ0FBQyxDQUFDQyxxQkFDViw4REFBQ0M7a0NBQWVEO3VCQUFQQTs7Ozs7Ozs7OzswQkFHYiw4REFBQ1QsZ0VBQVdBOzs7Ozs7Ozs7OztBQUdsQiIsInNvdXJjZXMiOlsid2VicGFjazovL3BvY2tldC8uL3NyYy9hcHAvcGFnZS5qcz8yYjNkIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IEJ1dHRvbkxpa2VzIH0gZnJvbSBcIi4uL0NvbXBvbmVudHMvQnV0dG9uTGlrZXNcIjtcblxuZnVuY3Rpb24gSGVhZGVyKHsgdGl0bGUgfSkge1xuICByZXR1cm4gPGgxPnt0aXRsZSA/IHRpdGxlIDogXCJEZWZhdWx0IHRpdGxlXCJ9PC9oMT47XG59XG5cbmV4cG9ydCBkZWZhdWx0IGZ1bmN0aW9uIEhvbWVQYWdlKCkge1xuICBjb25zdCBuYW1lcyA9IFtcIkFkYSBMb3ZlbGFjZVwiLCBcIkdyYWNlIEhvcHBlclwiLCBcIk1hcmdhcmV0IEhhbWlsdG9uXCJdO1xuICByZXR1cm4gKFxuICAgIDxkaXY+XG4gICAgICA8SGVhZGVyIHRpdGxlPVwiRGV2ZWxvcC4gUHJldmlldy4gU2hpcC5cIiAvPlxuICAgICAgPHVsPlxuICAgICAgICB7bmFtZXMubWFwKChuYW1lKSA9PiAoXG4gICAgICAgICAgPGxpIGtleT17bmFtZX0+e25hbWV9PC9saT5cbiAgICAgICAgKSl9XG4gICAgICA8L3VsPlxuICAgICAgPEJ1dHRvbkxpa2VzIC8+XG4gICAgPC9kaXY+XG4gICk7XG59XG4iXSwibmFtZXMiOlsiQnV0dG9uTGlrZXMiLCJIZWFkZXIiLCJ0aXRsZSIsImgxIiwiSG9tZVBhZ2UiLCJuYW1lcyIsImRpdiIsInVsIiwibWFwIiwibmFtZSIsImxpIl0sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///(rsc)/./src/app/page.js\n");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ HomePage)\n/* harmony export */ });\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-dev-runtime */ \"(rsc)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/rsc/react-jsx-dev-runtime.js\");\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! firebase/app */ \"(rsc)/./node_modules/firebase/app/dist/index.mjs\");\n/* harmony import */ var firebase_firestore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! firebase/firestore */ \"(rsc)/./node_modules/firebase/firestore/dist/index.mjs\");\n/* harmony import */ var _Components_ButtonLikes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Components/ButtonLikes */ \"(rsc)/./src/Components/ButtonLikes.tsx\");\n\n\n\n\nconst firebaseConfig = {\n    apiKey: \"AIzaSyDyYLRF6Hv6EEPcfIyzv94tWjAkTIoUAQo\",\n    authDomain: \"dailypaid.firebaseapp.com\",\n    projectId: \"dailypaid\",\n    storageBucket: \"dailypaid.appspot.com\",\n    messagingSenderId: \"741154149574\",\n    appId: \"1:741154149574:web:79fe83525797e3d0ccf3c7\"\n};\nfunction Header({ title }) {\n    return /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"h1\", {\n        children: title ? title : \"Default title\"\n    }, void 0, false, {\n        fileName: \"/Users/nguyenduy/Documents/Work and study/study/pocket/src/app/page.js\",\n        lineNumber: 15,\n        columnNumber: 10\n    }, this);\n}\nfunction HomePage() {\n    const app = (0,firebase_app__WEBPACK_IMPORTED_MODULE_1__.initializeApp)(firebaseConfig);\n    const db = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.getFirestore)(app);\n    //   const [data, setData] = useState < any > [];\n    //   useEffect(() => {\n    //     const getCollection = async (db: any) => {\n    //       const collection_ = collection(db, \"paid_check\");\n    //       const response = await getDocs(collection_);\n    //       return response.docs.map((doc) => doc.data());\n    //     };\n    //     getCollection(db)\n    //       .then((res) => setData(res))\n    //       .catch((err) => console.log(\"err\", err));\n    //   }, []);\n    const names = [\n        \"Ada Lovelace\",\n        \"Grace Hopper\",\n        \"Margaret Hamilton\"\n    ];\n    return /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"div\", {\n        children: [\n            /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(Header, {\n                title: \"Develop. Preview. Ship.\"\n            }, void 0, false, {\n                fileName: \"/Users/nguyenduy/Documents/Work and study/study/pocket/src/app/page.js\",\n                lineNumber: 35,\n                columnNumber: 7\n            }, this),\n            /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"ul\", {\n                children: names.map((name)=>/*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"li\", {\n                        children: name\n                    }, name, false, {\n                        fileName: \"/Users/nguyenduy/Documents/Work and study/study/pocket/src/app/page.js\",\n                        lineNumber: 38,\n                        columnNumber: 11\n                    }, this))\n            }, void 0, false, {\n                fileName: \"/Users/nguyenduy/Documents/Work and study/study/pocket/src/app/page.js\",\n                lineNumber: 36,\n                columnNumber: 7\n            }, this),\n            /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_Components_ButtonLikes__WEBPACK_IMPORTED_MODULE_3__.ButtonLikes, {}, void 0, false, {\n                fileName: \"/Users/nguyenduy/Documents/Work and study/study/pocket/src/app/page.js\",\n                lineNumber: 41,\n                columnNumber: 7\n            }, this)\n        ]\n    }, void 0, true, {\n        fileName: \"/Users/nguyenduy/Documents/Work and study/study/pocket/src/app/page.js\",\n        lineNumber: 34,\n        columnNumber: 5\n    }, this);\n}\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKHJzYykvLi9zcmMvYXBwL3BhZ2UuanMiLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7OztBQUE2QztBQUMwQjtBQUNmO0FBRXhELE1BQU1LLGlCQUFpQjtJQUNyQkMsUUFBUTtJQUNSQyxZQUFZO0lBQ1pDLFdBQVc7SUFDWEMsZUFBZTtJQUNmQyxtQkFBbUI7SUFDbkJDLE9BQU87QUFDVDtBQUVBLFNBQVNDLE9BQU8sRUFBRUMsS0FBSyxFQUFFO0lBQ3ZCLHFCQUFPLDhEQUFDQztrQkFBSUQsUUFBUUEsUUFBUTs7Ozs7O0FBQzlCO0FBRWUsU0FBU0U7SUFDdEIsTUFBTUMsTUFBTWhCLDJEQUFhQSxDQUFDSztJQUMxQixNQUFNWSxLQUFLZCxnRUFBWUEsQ0FBQ2E7SUFDeEIsaURBQWlEO0lBQ2pELHNCQUFzQjtJQUN0QixpREFBaUQ7SUFDakQsMERBQTBEO0lBQzFELHFEQUFxRDtJQUNyRCx1REFBdUQ7SUFDdkQsU0FBUztJQUNULHdCQUF3QjtJQUN4QixxQ0FBcUM7SUFDckMsa0RBQWtEO0lBQ2xELFlBQVk7SUFDWixNQUFNRSxRQUFRO1FBQUM7UUFBZ0I7UUFBZ0I7S0FBb0I7SUFDbkUscUJBQ0UsOERBQUNDOzswQkFDQyw4REFBQ1A7Z0JBQU9DLE9BQU07Ozs7OzswQkFDZCw4REFBQ087MEJBQ0VGLE1BQU1HLEdBQUcsQ0FBQyxDQUFDQyxxQkFDViw4REFBQ0M7a0NBQWVEO3VCQUFQQTs7Ozs7Ozs7OzswQkFHYiw4REFBQ2xCLGdFQUFXQTs7Ozs7Ozs7Ozs7QUFHbEIiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9wb2NrZXQvLi9zcmMvYXBwL3BhZ2UuanM/MmIzZCJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBpbml0aWFsaXplQXBwIH0gZnJvbSBcImZpcmViYXNlL2FwcFwiO1xuaW1wb3J0IHsgY29sbGVjdGlvbiwgZ2V0RG9jcywgZ2V0RmlyZXN0b3JlIH0gZnJvbSBcImZpcmViYXNlL2ZpcmVzdG9yZVwiO1xuaW1wb3J0IHsgQnV0dG9uTGlrZXMgfSBmcm9tIFwiLi4vQ29tcG9uZW50cy9CdXR0b25MaWtlc1wiO1xuXG5jb25zdCBmaXJlYmFzZUNvbmZpZyA9IHtcbiAgYXBpS2V5OiBcIkFJemFTeUR5WUxSRjZIdjZFRVBjZkl5enY5NHRXakFrVElvVUFRb1wiLFxuICBhdXRoRG9tYWluOiBcImRhaWx5cGFpZC5maXJlYmFzZWFwcC5jb21cIixcbiAgcHJvamVjdElkOiBcImRhaWx5cGFpZFwiLFxuICBzdG9yYWdlQnVja2V0OiBcImRhaWx5cGFpZC5hcHBzcG90LmNvbVwiLFxuICBtZXNzYWdpbmdTZW5kZXJJZDogXCI3NDExNTQxNDk1NzRcIixcbiAgYXBwSWQ6IFwiMTo3NDExNTQxNDk1NzQ6d2ViOjc5ZmU4MzUyNTc5N2UzZDBjY2YzYzdcIixcbn07XG5cbmZ1bmN0aW9uIEhlYWRlcih7IHRpdGxlIH0pIHtcbiAgcmV0dXJuIDxoMT57dGl0bGUgPyB0aXRsZSA6IFwiRGVmYXVsdCB0aXRsZVwifTwvaDE+O1xufVxuXG5leHBvcnQgZGVmYXVsdCBmdW5jdGlvbiBIb21lUGFnZSgpIHtcbiAgY29uc3QgYXBwID0gaW5pdGlhbGl6ZUFwcChmaXJlYmFzZUNvbmZpZyk7XG4gIGNvbnN0IGRiID0gZ2V0RmlyZXN0b3JlKGFwcCk7XG4gIC8vICAgY29uc3QgW2RhdGEsIHNldERhdGFdID0gdXNlU3RhdGUgPCBhbnkgPiBbXTtcbiAgLy8gICB1c2VFZmZlY3QoKCkgPT4ge1xuICAvLyAgICAgY29uc3QgZ2V0Q29sbGVjdGlvbiA9IGFzeW5jIChkYjogYW55KSA9PiB7XG4gIC8vICAgICAgIGNvbnN0IGNvbGxlY3Rpb25fID0gY29sbGVjdGlvbihkYiwgXCJwYWlkX2NoZWNrXCIpO1xuICAvLyAgICAgICBjb25zdCByZXNwb25zZSA9IGF3YWl0IGdldERvY3MoY29sbGVjdGlvbl8pO1xuICAvLyAgICAgICByZXR1cm4gcmVzcG9uc2UuZG9jcy5tYXAoKGRvYykgPT4gZG9jLmRhdGEoKSk7XG4gIC8vICAgICB9O1xuICAvLyAgICAgZ2V0Q29sbGVjdGlvbihkYilcbiAgLy8gICAgICAgLnRoZW4oKHJlcykgPT4gc2V0RGF0YShyZXMpKVxuICAvLyAgICAgICAuY2F0Y2goKGVycikgPT4gY29uc29sZS5sb2coXCJlcnJcIiwgZXJyKSk7XG4gIC8vICAgfSwgW10pO1xuICBjb25zdCBuYW1lcyA9IFtcIkFkYSBMb3ZlbGFjZVwiLCBcIkdyYWNlIEhvcHBlclwiLCBcIk1hcmdhcmV0IEhhbWlsdG9uXCJdO1xuICByZXR1cm4gKFxuICAgIDxkaXY+XG4gICAgICA8SGVhZGVyIHRpdGxlPVwiRGV2ZWxvcC4gUHJldmlldy4gU2hpcC5cIiAvPlxuICAgICAgPHVsPlxuICAgICAgICB7bmFtZXMubWFwKChuYW1lKSA9PiAoXG4gICAgICAgICAgPGxpIGtleT17bmFtZX0+e25hbWV9PC9saT5cbiAgICAgICAgKSl9XG4gICAgICA8L3VsPlxuICAgICAgPEJ1dHRvbkxpa2VzIC8+XG4gICAgPC9kaXY+XG4gICk7XG59XG4iXSwibmFtZXMiOlsiaW5pdGlhbGl6ZUFwcCIsImNvbGxlY3Rpb24iLCJnZXREb2NzIiwiZ2V0RmlyZXN0b3JlIiwiQnV0dG9uTGlrZXMiLCJmaXJlYmFzZUNvbmZpZyIsImFwaUtleSIsImF1dGhEb21haW4iLCJwcm9qZWN0SWQiLCJzdG9yYWdlQnVja2V0IiwibWVzc2FnaW5nU2VuZGVySWQiLCJhcHBJZCIsIkhlYWRlciIsInRpdGxlIiwiaDEiLCJIb21lUGFnZSIsImFwcCIsImRiIiwibmFtZXMiLCJkaXYiLCJ1bCIsIm1hcCIsIm5hbWUiLCJsaSJdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///(rsc)/./src/app/page.js\n");
 
 /***/ })
 
@@ -197,7 +373,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 var __webpack_require__ = require("../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, ["vendor-chunks/next","vendor-chunks/@swc"], () => (__webpack_exec__("(rsc)/./node_modules/next/dist/build/webpack/loaders/next-app-loader.js?name=app%2Fpage&page=%2Fpage&appPaths=%2Fpage&pagePath=private-next-app-dir%2Fpage.js&appDir=%2FUsers%2Fnguyenduy%2FDocuments%2FWork%20and%20study%2Fstudy%2Fpocket%2Fsrc%2Fapp&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&rootDir=%2FUsers%2Fnguyenduy%2FDocuments%2FWork%20and%20study%2Fstudy%2Fpocket&isDev=true&tsconfigPath=tsconfig.json&basePath=&assetPrefix=&nextConfigOutput=&preferredRegion=&middlewareConfig=e30%3D!")));
+var __webpack_exports__ = __webpack_require__.X(0, ["vendor-chunks/next","vendor-chunks/@swc","vendor-chunks/@grpc","vendor-chunks/protobufjs","vendor-chunks/@protobufjs","vendor-chunks/@firebase","vendor-chunks/idb","vendor-chunks/firebase","vendor-chunks/long","vendor-chunks/lodash.camelcase"], () => (__webpack_exec__("(rsc)/./node_modules/next/dist/build/webpack/loaders/next-app-loader.js?name=app%2Fpage&page=%2Fpage&appPaths=%2Fpage&pagePath=private-next-app-dir%2Fpage.js&appDir=%2FUsers%2Fnguyenduy%2FDocuments%2FWork%20and%20study%2Fstudy%2Fpocket%2Fsrc%2Fapp&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&rootDir=%2FUsers%2Fnguyenduy%2FDocuments%2FWork%20and%20study%2Fstudy%2Fpocket&isDev=true&tsconfigPath=tsconfig.json&basePath=&assetPrefix=&nextConfigOutput=&preferredRegion=&middlewareConfig=e30%3D!")));
 module.exports = __webpack_exports__;
 
 })();
