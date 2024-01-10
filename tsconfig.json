@@ -20,7 +20,14 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "baseUrl": "./src/",
+    "paths": {
+      "@utils/*": ["utils/*"],
+      "@features/*": ["features/*"],
+      "@components/*": ["components/*"],
+      "@layouts/*": ["layouts/*"]
+    }
   },
   "include": [
     "src",
