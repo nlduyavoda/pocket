@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { Button, Flex } from "antd";
 
 export const ButtonLikes = () => {
   const [likes, setLikes] = useState(0);
@@ -7,8 +8,8 @@ export const ButtonLikes = () => {
     setLikes(likes + 1);
   }
   return (
-    <button className="rounded-sm bg-pink" onClick={handleClick}>
+    <Button className="rounded-sm bg-pink" onClick={handleClick}>
       Like ({likes})
-    </button>
+    </Button>
   );
 };

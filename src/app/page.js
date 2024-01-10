@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { collection, getDocs, getFirestore } from "firebase/firestore";
-import { ButtonLikes } from "../Components/ButtonLikes";
+import { ButtonLikes } from "../components/buttons/ButtonLikes";
 import RootLayout from "../layouts/RootLayout";
 
 const firebaseConfig = {
