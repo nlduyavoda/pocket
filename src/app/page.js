@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { collection, getDocs, getFirestore } from "firebase/firestore";
 import { ButtonLikes } from "../Components/ButtonLikes";
+import RootLayout from "../layouts/RootLayout";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDyYLRF6Hv6EEPcfIyzv94tWjAkTIoUAQo",
@@ -31,7 +32,7 @@ export default function HomePage() {
   //   }, []);
   const names = ["Ada Lovelace", "Grace Hopper", "Margaret Hamilton"];
   return (
-    <div>
+    <RootLayout>
       <Header title="Develop. Preview. Ship." />
       <ul>
         {names.map((name) => (
@@ -39,6 +40,6 @@ export default function HomePage() {
         ))}
       </ul>
       <ButtonLikes />
-    </div>
+    </RootLayout>
   );
 }

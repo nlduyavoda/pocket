@@ -1,5 +1,4 @@
 "use client";
-import "../index.css";
 import { useState } from "react";
 
 export const ButtonLikes = () => {
