@@ -2,6 +2,7 @@ export const sum = (a: number, b: number) => {
   return a + b;
 };
 
+
 export type MonthlyExpenses = {
   housing: {
     rent_or_mortgage: number;
@@ -43,6 +44,43 @@ export type MonthlyExpenses = {
     miscellaneous: number;
   };
   total_expenses: number;
+};
+
+export const ExpenseCategories = {
+  housing: "nhà ở",
+  transportation: "giao thông",
+  groceries: "thực phẩm",
+  healthcare: "chăm sóc sức khỏe",
+  entertainment: "giải trí",
+  personal_care: "chăm sóc cá nhân",
+  debts: "nợ",
+  savings: "tiết kiệm",
+  other_expenses: "các khoản chi phí khác",
+  total_expenses: "tổng chi phí",
+};
+
+export const ExpenseProperties = {
+  rent_or_mortgage: "tiền thuê hoặc trả góp",
+  utilities: "tiện ích",
+  home_maintenance: "bảo dưỡng nhà cửa",
+  car_payment: "trả góp xe",
+  insurance: "bảo hiểm",
+  fuel: "nhiên liệu",
+  public_transport: "giao thông công cộng",
+  prescriptions: "đơn thuốc",
+  other_medical_expenses: "các chi phí y tế khác",
+  dining_out: "ăn ngoại trời",
+  subscriptions: "đăng ký",
+  movies_and_events: "phim và sự kiện",
+  haircuts: "cắt tóc",
+  toiletries: "đồ dùng cá nhân",
+  credit_card_payments: "thanh toán thẻ tín dụng",
+  loan_payments: "thanh toán khoản vay",
+  emergency_fund: "quỹ khẩn cấp",
+  retirement: "hưu trí",
+  other_savings: "tiết kiệm khác",
+  gifts_and_donations: "quà tặng và đóng góp",
+  miscellaneous: "linh tinh",
 };
 
 // Example usage
@@ -88,5 +126,12 @@ export const defaultMonthlyExpenses: MonthlyExpenses = {
   },
   total_expenses: 2770, // Sum of all expenses
 };
+
+export type Expenses_keys = keyof MonthlyExpenses;
+
+type SubKeys<T> = T extends object ? keyof T : string;
+
+export type NestedKeys = SubKeys<MonthlyExpenses[Expenses_keys]>;
+
 
 

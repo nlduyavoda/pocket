@@ -1,15 +1,19 @@
 "use client";
-import { defaultMonthlyExpenses, MonthlyExpenses } from "@utils/variables";
+import {
+    ExpenseCategories,
+    ExpenseProperties,
+    Expenses_keys,
+    MonthlyExpenses,
+    defaultMonthlyExpenses
+} from "@utils/variables";
+import {
+    ConfigProvider,
+    Form,
+    Input,
+    Typography
+} from "antd";
 import { Fragment } from "react";
 import { Controller, FormProvider, useForm } from "react-hook-form";
-import {
-  Button,
-  Checkbox,
-  ConfigProvider,
-  Form,
-  Input,
-  Typography,
-} from "antd";
 
 export const PocketForm = () => {
   const methods = useForm<MonthlyExpenses>({
@@ -18,9 +22,9 @@ export const PocketForm = () => {
 
   const onSubmit = (params: MonthlyExpenses) => {};
 
-  console.log(methods.getValues());
   const formValues: MonthlyExpenses = methods.getValues();
-  const formKeys = Object.keys(formValues) as (keyof MonthlyExpenses)[];
+  const formKeys = Object.keys(formValues) as Expenses_keys[];
+  console.log(methods.watch());
   return (
     <ConfigProvider
       theme={{
@@ -54,47 +58,47 @@ export const PocketForm = () => {
             flexDirection: "column",
           }}
         >
-          {formKeys.map((ele: keyof MonthlyExpenses, idx) => {
+          {formKeys.map((subKey: Expenses_keys, idx) => {
+            const subValues = formValues[
+              subKey
+            ] as MonthlyExpenses[Expenses_keys];
+            const subKeys = Object.keys(
+              subValues
+            ) as (keyof MonthlyExpenses[Expenses_keys])[];
             return (
               <Form.Item key={idx}>
-                <Typography.Title className="text-white" level={3}>
-                  {ele}
+                <Typography.Title className="text-white capitalize" level={3}>
+                  {ExpenseCategories[subKey]}
                 </Typography.Title>
-                <Controller
-                  control={methods.control}
-                  name={ele}
-                  render={({ field }) => {
-                    const fieldValues = field.value as Partial<MonthlyExpenses>;
-                    const fieldKeys = Object.keys(
-                      fieldValues
-                    ) as (keyof MonthlyExpenses)[];
+                {subKeys.map(
+                  (nestedKey: keyof MonthlyExpenses[Expenses_keys], idx) => {
+                    const fieldName = `${subKey}.${nestedKey}` as never;
                     return (
-                      <>
-                        {fieldKeys.map((subKey: keyof MonthlyExpenses, idx) => {
-                          const subValues = fieldValues[subKey];
-                          console.log(
-                            "subValues?.toString()",
-                            subValues?.toString()
-                          );
+                      <Controller
+                        key={nestedKey}
+                        control={methods.control}
+                        name={fieldName}
+                        render={({ field }) => {
                           return (
-                            <Fragment key={subKey}>
+                            <Fragment>
                               <Typography.Title
-                                className="text-white"
+                                className="text-white capitalize"
                                 level={5}
                               >
-                                {subKey}
+                                {ExpenseProperties[field.name]}
                               </Typography.Title>
                               <Input
-                                placeholder={subKey}
-                                value={subValues?.toString()}
+                                placeholder={ExpenseProperties[field.name]}
+                                value={field.value}
+                                onChange={field.onChange}
                               />
                             </Fragment>
                           );
-                        })}
-                      </>
+                        }}
+                      />
                     );
-                  }}
-                />
+                  }
+                )}
               </Form.Item>
             );
           })}
