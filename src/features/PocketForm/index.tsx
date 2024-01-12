@@ -11,6 +11,8 @@ import {
 import { ConfigProvider, Form, Input, Typography } from "antd";
 import { Fragment } from "react";
 import { Controller, FormProvider, useForm } from "react-hook-form";
+import PocketModal from "./PocketModal";
+import { FormContent } from "./FormContent";
 
 export const PocketForm = () => {
   const methods = useForm<MonthlyExpenses>({
@@ -25,7 +27,7 @@ export const PocketForm = () => {
   return (
     <ConfigProvider theme={antDesignProviderTheme}>
       <FormProvider {...methods}>
-        <div>
+        <PocketModal>
           <Form
             name="basic"
             layout="vertical"
@@ -33,81 +35,18 @@ export const PocketForm = () => {
             onFinish={methods.handleSubmit(onSubmit)}
             autoComplete="off"
             style={{
-              maxWidth: 300,
               alignContent: "center",
               display: "flex",
               flexDirection: "column",
             }}
           >
-            {formKeys.map((subKey: Expenses_keys, idx) => {
-              const subValues = formValues[
-                subKey
-              ] as MonthlyExpenses[Expenses_keys];
-              const subKeys = Object.keys(
-                subValues
-              ) as (keyof MonthlyExpenses[Expenses_keys])[];
-              return (
-                <Form.Item key={idx}>
-                  <Typography.Title className="text-white capitalize" level={3}>
-                    {ExpenseCategories[subKey]}
-                  </Typography.Title>
-                  {typeof subValues === "object" ? (
-                    subKeys.map(
-                      (
-                        nestedKey: keyof MonthlyExpenses[Expenses_keys],
-                        idx
-                      ) => {
-                        const fieldName = `${subKey}.${nestedKey}` as never;
-                        const nestedLabel = ExpenseProperties[nestedKey];
-                        return (
-                          <Controller
-                            key={nestedKey}
-                            control={methods.control}
-                            name={fieldName}
-                            render={({ field }) => {
-                              return (
-                                <Fragment>
-                                  <Typography.Title
-                                    className="text-white capitalize"
-                                    level={5}
-                                  >
-                                    {nestedLabel}
-                                  </Typography.Title>
-                                  <Input
-                                    placeholder={ExpenseProperties[field.name]}
-                                    value={field.value}
-                                    onChange={field.onChange}
-                                  />
-                                </Fragment>
-                              );
-                            }}
-                          />
-                        );
-                      }
-                    )
-                  ) : (
-                    <Controller
-                      control={methods.control}
-                      name={subKey}
-                      render={({ field }) => {
-                        return (
-                          <Fragment>
-                            <Input
-                              placeholder={ExpenseCategories[subKey]}
-                              value={field.value}
-                              onChange={field.onChange}
-                            />
-                          </Fragment>
-                        );
-                      }}
-                    />
-                  )}
-                </Form.Item>
-              );
-            })}
+            <div className="max-h-96 overflow-scroll">
+              {formKeys.map((subKey: Expenses_keys, idx) => (
+                <FormContent key={subKey} categoryKeys={subKey} />
+              ))}
+            </div>
           </Form>
-        </div>
-        <div className="max-w-screen-lg">{/* <PocketTable /> */}</div>
+        </PocketModal>
       </FormProvider>
     </ConfigProvider>
   );
