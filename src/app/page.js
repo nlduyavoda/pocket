@@ -1,10 +1,13 @@
 import RootLayout from "@layouts/RootLayout";
-import { PocketForm } from "@features/pocket";
+import HomeLayout from "@layouts/HomeLayout";
+import { PocketForm } from "@features/PocketForm";
 
 export default function HomePage() {
   return (
     <RootLayout>
-      <PocketForm />
+      <HomeLayout>
+        <PocketForm />
+      </HomeLayout>
     </RootLayout>
   );
 }

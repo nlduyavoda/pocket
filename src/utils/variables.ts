@@ -2,8 +2,25 @@ export const sum = (a: number, b: number) => {
   return a + b;
 };
 
+export const antDesignProviderTheme = {
+  components: {
+    Typography: {
+      colorPrimary: "#fff",
+    },
+    Button: {
+      colorPrimary: "#00b96b",
+      algorithm: true, // Enable algorithm
+    },
+    Input: {
+      colorPrimary: "#eb2f96",
+      algorithm: true, // Enable algorithm
+    },
+  },
+};
+
 
 export type MonthlyExpenses = {
+  date_added: string;
   housing: {
     rent_or_mortgage: number;
     utilities: number;
@@ -46,7 +63,10 @@ export type MonthlyExpenses = {
   total_expenses: number;
 };
 
-export const ExpenseCategories = {
+export type ExpenseType<T extends string> = { [K in T]: string };
+
+export const ExpenseCategories: ExpenseType<keyof MonthlyExpenses> = {
+  date_added: "ngày",
   housing: "nhà ở",
   transportation: "giao thông",
   groceries: "thực phẩm",
@@ -85,9 +105,10 @@ export const ExpenseProperties = {
 
 // Example usage
 export const defaultMonthlyExpenses: MonthlyExpenses = {
+  date_added: "2024-01-10T12:00:00Z",
   housing: {
     rent_or_mortgage: 1200,
-    utilities: 150,
+    utilities: 15000,
     home_maintenance: 50,
   },
   transportation: {
@@ -127,11 +148,20 @@ export const defaultMonthlyExpenses: MonthlyExpenses = {
   total_expenses: 2770, // Sum of all expenses
 };
 
+const Fixed_columns = ["house"];
+
 export type Expenses_keys = keyof MonthlyExpenses;
 
 type SubKeys<T> = T extends object ? keyof T : string;
 
 export type NestedKeys = SubKeys<MonthlyExpenses[Expenses_keys]>;
 
-
+type DataType = {
+  key: string;
+  category: string;
+  expense: string;
+  value: DataType[];
+};
+export type SubChild1<T extends Expenses_keys> = { [K in T]: DataType };
+export type Child1 = SubChild1<Expenses_keys>;
 
