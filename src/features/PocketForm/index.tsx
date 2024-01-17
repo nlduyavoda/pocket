@@ -10,13 +10,18 @@ import { FieldValues, FormProvider, useForm } from "react-hook-form";
 import { FormContent } from "./FormContent";
 import PocketModal from "./PocketModal";
 
-export const PocketForm = () => {
+export const PocketForm = ({
+  onAddPayment,
+}: {
+  onAddPayment: (payment: MonthlyExpenses) => void;
+}) => {
   const methods = useForm<MonthlyExpenses>({
     defaultValues: defaultMonthlyExpenses,
   });
 
-  const onSubmit = (params: FieldValues) => {
-    console.log(params);
+  const onSubmit = (payment: FieldValues) => {
+    const paymentCloned = { ...payment } as MonthlyExpenses;
+    onAddPayment(paymentCloned);
   };
 
   const formValues: MonthlyExpenses = methods.getValues();
@@ -25,7 +30,7 @@ export const PocketForm = () => {
   return (
     <ConfigProvider theme={antDesignProviderTheme}>
       <FormProvider {...methods}>
-        <PocketModal>
+        <PocketModal onSubmit={methods.handleSubmit(onSubmit)}>
           <Form
             name="basic"
             layout="vertical"

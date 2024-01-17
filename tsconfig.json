@@ -28,7 +28,8 @@
       "@utils/*": ["utils/*"],
       "@features/*": ["features/*"],
       "@components/*": ["components/*"],
-      "@layouts/*": ["layouts/*"]
+      "@layouts/*": ["layouts/*"],
+      "@styles/*": ["styles/*"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],

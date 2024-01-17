@@ -1,7 +1,14 @@
 import React, { ReactNode, useState } from "react";
 import { Button, Modal } from "antd";
+import "./PocketModal.css";
 
-const PocketModal = ({ children }: { children: ReactNode }) => {
+const PocketModal = ({
+  children,
+  onSubmit,
+}: {
+  children: ReactNode;
+  onSubmit: () => void;
+}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const showModal = () => {
@@ -10,6 +17,7 @@ const PocketModal = ({ children }: { children: ReactNode }) => {
 
   const handleOk = () => {
     setIsModalOpen(false);
+    onSubmit();
   };
 
   const handleCancel = () => {
@@ -17,16 +25,16 @@ const PocketModal = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <>
-      <Button
-        className="bg-blue border-spacing-1"
-        type="primary"
-        onClick={showModal}
-      >
+    <div className="w-screen">
+      <Button className="border-spacing-1" onClick={showModal}>
         Open Modal
       </Button>
       <Modal
-        className="bg-purple w-screen"
+        classNames={{
+          mask: "modalMask",
+          body: "modalBody",
+          footer: "modalFooter",
+        }}
         title="Basic Modal"
         open={isModalOpen}
         onOk={handleOk}
@@ -34,7 +42,7 @@ const PocketModal = ({ children }: { children: ReactNode }) => {
       >
         {children}
       </Modal>
-    </>
+    </div>
   );
 };
 
