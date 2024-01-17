@@ -27,7 +27,13 @@ export const FormContent = ({
       </Typography.Title>
       {typeof subValues === "object" ? (
         subKeys.map((subKeys: keyof MonthlyExpenses[Expenses_keys], idx) => {
-          return <FormSubContent keys={categoryKeys} subKeys={subKeys} />;
+          return (
+            <FormSubContent
+              key={categoryKeys + idx}
+              keys={categoryKeys}
+              subKeys={subKeys}
+            />
+          );
         })
       ) : (
         <Controller

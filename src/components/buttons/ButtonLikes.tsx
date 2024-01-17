@@ -1,6 +1,5 @@
-"use client";
 import { useState } from "react";
-import { Button, Flex } from "antd";
+import { Button } from "antd";
 
 export const ButtonLikes = () => {
   const [likes, setLikes] = useState(0);

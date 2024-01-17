@@ -1,25 +1,23 @@
-"use client";
-import { PocketTable } from "@features/PocketTable";
+import * as React from "react";
 import {
-  ExpenseCategories,
-  ExpenseProperties,
   Expenses_keys,
   MonthlyExpenses,
   antDesignProviderTheme,
   defaultMonthlyExpenses,
 } from "@utils/variables";
-import { ConfigProvider, Form, Input, Typography } from "antd";
-import { Fragment } from "react";
-import { Controller, FormProvider, useForm } from "react-hook-form";
-import PocketModal from "./PocketModal";
+import { ConfigProvider, Form } from "antd";
+import { FieldValues, FormProvider, useForm } from "react-hook-form";
 import { FormContent } from "./FormContent";
+import PocketModal from "./PocketModal";
 
 export const PocketForm = () => {
   const methods = useForm<MonthlyExpenses>({
     defaultValues: defaultMonthlyExpenses,
   });
 
-  const onSubmit = (params: MonthlyExpenses) => {};
+  const onSubmit = (params: FieldValues) => {
+    console.log(params);
+  };
 
   const formValues: MonthlyExpenses = methods.getValues();
   const formKeys = Object.keys(formValues) as Expenses_keys[];
