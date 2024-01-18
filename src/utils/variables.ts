@@ -107,7 +107,7 @@ export const ExpenseProperties = {
 export const defaultMonthlyExpenses: MonthlyExpenses = {
   date_added: "2024-01-10T12:00:00Z",
   housing: {
-    rent_or_mortgage: 1200,
+    rent_or_mortgage: 1000,
     utilities: 15000,
     home_maintenance: 50,
   },
@@ -147,8 +147,6 @@ export const defaultMonthlyExpenses: MonthlyExpenses = {
   },
   total_expenses: 2770, // Sum of all expenses
 };
-
-const Fixed_columns = ["house"];
 
 export type Expenses_keys = keyof MonthlyExpenses;
 

@@ -6,6 +6,7 @@ import {
   NestedKeys,
 } from "@utils/variables";
 import { ColumnType, ColumnsType } from "antd/es/table";
+import { format } from "date-fns";
 
 export const dataSource = [
   {
@@ -71,13 +72,17 @@ export const getTableColumns = (
       title,
       dataIndex: parentKey ? `${parentKey}.${singleKey}` : singleKey,
       key: parentKey ? `${parentKey}.${singleKey}` : singleKey,
-      width: 100,
+      width: 150,
       children: isNestedField
         ? getTableColumns(props[singleKey], singleKey)
         : [],
     } as ColumnType<object>;
     if (singleKey === "date_added") {
-      return { ...tableColumns, fixed: "left" } as ColumnType<object>;
+      return {
+        ...tableColumns,
+        width: 150,
+        fixed: "left",
+      } as ColumnType<object>;
     } else {
       return tableColumns;
     }
@@ -88,6 +93,10 @@ export const getTableColumns = (
 
 type FlattenedExpense = {
   [key: string]: number | string;
+};
+
+const formatDatePicker = (date: string) => {
+  return format(date, "dd/MMM/yyyy");
 };
 
 export const flattenObject = (
@@ -105,7 +114,13 @@ export const flattenObject = (
       result = { ...result, ...flattenedObject };
     } else {
       const newKey = parentKey ? `${parentKey}.${key}` : key;
-      result[newKey] = obj[key];
+      switch (key) {
+        case "date_added":
+          result[newKey] = formatDatePicker(obj[key]);
+          break;
+        default:
+          result[newKey] = obj[key];
+      }
     }
   }
 
