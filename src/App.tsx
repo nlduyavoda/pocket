@@ -2,33 +2,39 @@ import { PocketForm } from "@features/PocketForm";
 import { PocketTable } from "@features/PocketTable";
 import { MonthlyExpenses } from "@utils/variables";
 import { useEffect, useState } from "react";
-import {
-  GetCollectionResponse,
-  getCollection,
-} from "./services/FireBaseConfig";
+import { addCollection, getCollection } from "./services/FireBaseMethods";
+import { TRANSACTIONS } from "./services/utils";
+import { onFilterPayment } from "@utils/PaymentController/Transactions";
 
 function App() {
   // TODO: Replace the following with your app's Firebase project configuration
-
   const [payment, setPayment] = useState<MonthlyExpenses[]>([]);
-  const handleAddPayment = (paymentProps: MonthlyExpenses) => {
+  const handleAddPayment = async (paymentProps: MonthlyExpenses) => {
     const dataCloned = [...payment];
     dataCloned.unshift(paymentProps);
-    setPayment(dataCloned);
+    const { status } = await addCollection({
+      documentName: TRANSACTIONS,
+      data: paymentProps,
+    });
+    if (status === "ok") {
+      setPayment(dataCloned);
+    } else {
+      console.log("fail");
+    }
   };
 
   useEffect(() => {
     async function getAsyncCollection() {
       const { status, data } = (await getCollection({
-        documentName: "transactions",
-      })) as GetCollectionResponse;
+        documentName: TRANSACTIONS,
+      })) as { status: "fail" | "ok"; data: MonthlyExpenses[] };
       if (status === "ok" && data) {
-        const newPayment = [...payment] as MonthlyExpenses[];
-        const newData = { ...data } as MonthlyExpenses;
-        newPayment.unshift(newData);
-        setPayment(newPayment);
+        const filterData: MonthlyExpenses[] = data.map((payment) => {
+          return onFilterPayment(payment);
+        });
+        setPayment(filterData);
       } else {
-        console.log("set data fail");
+        console.log("getCollection fail");
       }
     }
     getAsyncCollection();
