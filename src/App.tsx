@@ -1,15 +1,16 @@
-import { PocketForm } from "@features/PocketForm";
 import { PocketTable } from "@features/PocketTable";
+import { onFilterPayment } from "@utils/PaymentController/Transactions";
 import { MonthlyExpenses } from "@utils/variables";
 import { useEffect, useState } from "react";
 import { addCollection, getCollection } from "./services/FireBaseMethods";
 import { TRANSACTIONS } from "./services/utils";
-import { onFilterPayment } from "@utils/PaymentController/Transactions";
+import DrawerFeature from "@features/Drawer";
 
 function App() {
   // TODO: Replace the following with your app's Firebase project configuration
   const [payment, setPayment] = useState<MonthlyExpenses[]>([]);
-  const handleAddPayment = async (paymentProps: MonthlyExpenses) => {
+
+  const onAddPaymentToFireBase = async (paymentProps: MonthlyExpenses) => {
     const dataCloned = [...payment];
     dataCloned.unshift(paymentProps);
     const { status } = await addCollection({
@@ -43,7 +44,7 @@ function App() {
   return (
     <div className="App">
       {payment.length > 0 ? <PocketTable data={payment} /> : "loading"}
-      <PocketForm onAddPayment={handleAddPayment} />
+      <DrawerFeature onAddPayment={onAddPaymentToFireBase} />
     </div>
   );
 }
