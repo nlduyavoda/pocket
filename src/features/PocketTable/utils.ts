@@ -61,28 +61,25 @@ export const getTableColumns = (
   parentKey?: string
 ): ColumnsType<object> => {
   const propKeys = Object.keys(props) as string[];
-  const columns = propKeys.map((singleKey: Expenses_keys | NestedKeys) => {
-    const isNestedField: boolean = onCheckNested(props[singleKey]);
+  const columns = propKeys.map((col: Expenses_keys | NestedKeys) => {
     const titleKeys: { [key: string]: string } = { ...ExpenseCategories };
     const subTitleKeys: { [key: string]: string } = { ...ExpenseProperties };
-
-    const title = parentKey ? subTitleKeys[singleKey] : titleKeys[singleKey];
-
+    const title = parentKey ? subTitleKeys[col] : titleKeys[col];
     const tableColumns = {
       title,
-      dataIndex: parentKey ? `${parentKey}.${singleKey}` : singleKey,
-      key: parentKey ? `${parentKey}.${singleKey}` : singleKey,
+      dataIndex: parentKey ? `${parentKey}.${col}` : col,
+      key: parentKey ? `${parentKey}.${col}` : col,
       width: 150,
-      children: isNestedField
-        ? getTableColumns(props[singleKey], singleKey)
-        : [],
+      children: [],
     } as ColumnType<object>;
-    if (singleKey === "date_added") {
-      return {
+    const fixedColumns = ["total_expenses", "date_added"];
+    if (fixedColumns.includes(col)) {
+      const fixedColProperties = {
         ...tableColumns,
         width: 150,
         fixed: "left",
-      } as ColumnType<object>;
+      };
+      return fixedColProperties as ColumnType<object>;
     } else {
       return tableColumns;
     }
@@ -107,11 +104,15 @@ export const flattenObject = (
 
   for (const key in obj) {
     if (typeof obj[key] === "object" && obj[key] !== null) {
-      const flattenedObject = flattenObject(
-        obj[key],
-        parentKey ? `${parentKey}.${key}` : key
+      const childVal = obj[key];
+      const prices = [0];
+      Object.keys(childVal).forEach((keys) => {
+        prices.push(+childVal[keys]);
+      });
+      const totalPrice = prices.reduce(
+        (accomulator: number, currentVal: number) => +accomulator + currentVal
       );
-      result = { ...result, ...flattenedObject };
+      result[key] = totalPrice;
     } else {
       const newKey = parentKey ? `${parentKey}.${key}` : key;
       switch (key) {

@@ -27,7 +27,7 @@ const PocketModal = ({
   return (
     <div className="w-screen">
       <Button className="border-spacing-1" onClick={showModal}>
-        Open Modal
+        Add New
       </Button>
       <Modal
         classNames={{
