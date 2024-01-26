@@ -20,6 +20,7 @@ export const antDesignProviderTheme = {
 
 
 export type MonthlyExpenses = {
+  id: string;
   date_added: string;
   housing: {
     rent_or_mortgage: number;
@@ -66,6 +67,7 @@ export type MonthlyExpenses = {
 export type ExpenseType<T extends string> = { [K in T]: string };
 
 export const ExpenseCategories: ExpenseType<keyof MonthlyExpenses> = {
+  id: "id",
   date_added: "ngày",
   housing: "nhà ở",
   transportation: "giao thông",
@@ -105,6 +107,7 @@ export const ExpenseProperties = {
 
 // Example usage
 export const defaultMonthlyExpenses: MonthlyExpenses = {
+  id: "",
   date_added: "2024-01-10T12:00:00Z",
   total_expenses: 2770, // Sum of all expenses
   housing: {

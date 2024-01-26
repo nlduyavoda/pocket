@@ -52,10 +52,6 @@ export const defaultTableData = [
   },
 ];
 
-const onCheckNested = (props: MonthlyExpenses[Expenses_keys]): boolean => {
-  return typeof props === "object" && Object.keys(props).length > 0;
-};
-
 export const getTableColumns = (
   props: any,
   parentKey?: string

@@ -10,7 +10,7 @@ export const DrawerInternal = ({
 }: {
   open: boolean;
   onClose: () => void;
-  onSubmit: () => void;
+  onSubmit?: () => void;
   title: string;
   children: ReactNode;
 }) => {
@@ -28,7 +28,7 @@ export const DrawerInternal = ({
       extra={
         <Space>
           <Button onClick={onClose}>Cancel</Button>
-          <Button onClick={onSubmit}>Submit</Button>
+          {onSubmit && <Button onClick={onSubmit}>Submit</Button>}
         </Space>
       }
     >

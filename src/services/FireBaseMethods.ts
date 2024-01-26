@@ -31,7 +31,8 @@ export const getCollection = async ({
     const result: Array<unknown> = [];
     docSnap.forEach((doc) => {
       if (doc.id) {
-        result.push(doc.data());
+        const data = doc.data();
+        result.push({ id: doc.id, ...data });
       }
     });
 
@@ -61,13 +62,8 @@ export const addDocument = async ({
   data: DocumentType;
 }): Promise<FetchResType> => {
   try {
-    console.log({
-      collectionName,
-      data,
-    });
     const paymentRef = doc(fireStore, collectionName);
     const result = await setDoc(paymentRef, data);
-    console.log("result", result);
     return {
       status: "ok",
       data: result,
