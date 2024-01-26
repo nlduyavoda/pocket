@@ -1,0 +1,94 @@
+[debug] [2024-01-26T17:39:40.927Z] ----------------------------------------------------------------------
+[debug] [2024-01-26T17:39:40.930Z] Command:       /Users/nguyenduy/.nvm/versions/node/v20.9.0/bin/node /Users/nguyenduy/.nvm/versions/node/v20.9.0/bin/firebase deploy --debug
+[debug] [2024-01-26T17:39:40.930Z] CLI Version:   13.1.0
+[debug] [2024-01-26T17:39:40.930Z] Platform:      darwin
+[debug] [2024-01-26T17:39:40.930Z] Node Version:  v20.9.0
+[debug] [2024-01-26T17:39:40.931Z] Time:          Sat Jan 27 2024 00:39:40 GMT+0700 (Indochina Time)
+[debug] [2024-01-26T17:39:40.931Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-01-26T17:39:41.007Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-01-26T17:39:41.008Z] > authorizing via signed-in user (nguyenleduy1199@gmail.com)
+[debug] [2024-01-26T17:39:41.009Z] [iam] checking project dailypaid for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2024-01-26T17:39:41.013Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/dailypaid:testIamPermissions [none]
+[debug] [2024-01-26T17:39:41.014Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/dailypaid:testIamPermissions x-goog-quota-user=projects/dailypaid
+[debug] [2024-01-26T17:39:41.014Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/dailypaid:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2024-01-26T17:39:42.194Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/dailypaid:testIamPermissions 200
+[debug] [2024-01-26T17:39:42.195Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/dailypaid:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2024-01-26T17:39:42.196Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/dailypaid [none]
+[debug] [2024-01-26T17:39:42.588Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/dailypaid 200
+[debug] [2024-01-26T17:39:42.588Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/dailypaid {"projectId":"dailypaid","projectNumber":"741154149574","displayName":"dailyPaid","name":"projects/dailypaid","resources":{"hostingSite":"dailypaid"},"state":"ACTIVE","etag":"1_50e76433-7646-46ed-8fe2-bb41d2d53d56"}
+[info] 
+[info] === Deploying to 'dailypaid'...
+[info] 
+[info] i  deploying hosting 
+[debug] [2024-01-26T17:39:42.595Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/dailypaid/versions [none]
+[debug] [2024-01-26T17:39:42.595Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/dailypaid/versions {"status":"CREATED","labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2024-01-26T17:39:43.337Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/dailypaid/versions 200
+[debug] [2024-01-26T17:39:43.337Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/dailypaid/versions {"name":"projects/741154149574/sites/dailypaid/versions/c62edf7449ce96f7","status":"CREATED","config":{},"labels":{"deployment-tool":"cli-firebase"}}
+[info] i  hosting[dailypaid]: beginning deploy... 
+[info] i  hosting[dailypaid]: found 8 files in dist 
+[debug] [2024-01-26T17:39:43.356Z] [hosting] uploading with 200 concurrency
+[debug] [2024-01-26T17:39:43.359Z] [hosting] hash cache [ZGlzdA] not populated
+[debug] [2024-01-26T17:39:43.435Z] [hosting] hash cache [ZGlzdA] stored for 8 files
+[debug] [2024-01-26T17:39:43.435Z] [hosting][hash queue][FINAL] {"max":71,"min":7,"avg":15.875,"active":0,"complete":8,"success":8,"errored":0,"retried":0,"total":8,"elapsed":76}
+[debug] [2024-01-26T17:39:43.435Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/741154149574/sites/dailypaid/versions/c62edf7449ce96f7:populateFiles [none]
+[debug] [2024-01-26T17:39:43.436Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/741154149574/sites/dailypaid/versions/c62edf7449ce96f7:populateFiles {"files":{"/favicon.ico":"b72f7455f00e4e58792d2bca892abb068e2213838c0316d6b7a0d6d16acd1955","/logo192.png":"caff018b7f1e8fd481eb1c50d75b0ef236bcd5078b1d15c8bb348453fee30293","/robots.txt":"391d14b3c2f8c9143a27a28c7399585142228d4d1bdbe2c87ac946de411fa9a2","/manifest.json":"341d52628782f8ac9290bbfc43298afccb47b7cbfcee146ae30cf0f46bc30900","/index.html":"99ecb147c8d9c6739b569f4e83c5cf90816349b474cb1901ed5d9cc7db9f5332","/assets/index-DYxw60xC.css":"c9b519a3507441c2c72ecb7a9009c7081539aa877cbba47d052c4e612163dc1f","/logo512.png":"191fc21360b4ccfb1cda11a1efb97f489ed22672ca83f4064316802bbfdd750e","/assets/index-0INE_-kX.js":"d14eb968b7e40279c681f075a0636523ac381980a6d9350d21dc12cd3e6af71e"}}
+[debug] [2024-01-26T17:39:43.839Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/741154149574/sites/dailypaid/versions/c62edf7449ce96f7:populateFiles 200
+[debug] [2024-01-26T17:39:43.839Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/741154149574/sites/dailypaid/versions/c62edf7449ce96f7:populateFiles {"uploadRequiredHashes":["99ecb147c8d9c6739b569f4e83c5cf90816349b474cb1901ed5d9cc7db9f5332","c9b519a3507441c2c72ecb7a9009c7081539aa877cbba47d052c4e612163dc1f","d14eb968b7e40279c681f075a0636523ac381980a6d9350d21dc12cd3e6af71e"],"uploadUrl":"https://upload-firebasehosting.googleapis.com/upload/sites/dailypaid/versions/c62edf7449ce96f7/files"}
+[debug] [2024-01-26T17:39:43.840Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/dailypaid/versions/c62edf7449ce96f7/files/99ecb147c8d9c6739b569f4e83c5cf90816349b474cb1901ed5d9cc7db9f5332 [none]
+[debug] [2024-01-26T17:39:43.840Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/dailypaid/versions/c62edf7449ce96f7/files/99ecb147c8d9c6739b569f4e83c5cf90816349b474cb1901ed5d9cc7db9f5332 [stream]
+[debug] [2024-01-26T17:39:43.842Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/dailypaid/versions/c62edf7449ce96f7/files/c9b519a3507441c2c72ecb7a9009c7081539aa877cbba47d052c4e612163dc1f [none]
+[debug] [2024-01-26T17:39:43.842Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/dailypaid/versions/c62edf7449ce96f7/files/c9b519a3507441c2c72ecb7a9009c7081539aa877cbba47d052c4e612163dc1f [stream]
+[debug] [2024-01-26T17:39:43.843Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/dailypaid/versions/c62edf7449ce96f7/files/d14eb968b7e40279c681f075a0636523ac381980a6d9350d21dc12cd3e6af71e [none]
+[debug] [2024-01-26T17:39:43.844Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/dailypaid/versions/c62edf7449ce96f7/files/d14eb968b7e40279c681f075a0636523ac381980a6d9350d21dc12cd3e6af71e [stream]
+[debug] [2024-01-26T17:39:43.845Z] [hosting][populate queue][FINAL] {"max":407,"min":407,"avg":407,"active":0,"complete":1,"success":1,"errored":0,"retried":0,"total":1,"elapsed":412}
+[debug] [2024-01-26T17:39:43.845Z] [hosting] uploads queued: 3
+[debug] [2024-01-26T17:39:44.925Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/dailypaid/versions/c62edf7449ce96f7/files/99ecb147c8d9c6739b569f4e83c5cf90816349b474cb1901ed5d9cc7db9f5332 200
+[debug] [2024-01-26T17:39:44.925Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/dailypaid/versions/c62edf7449ce96f7/files/99ecb147c8d9c6739b569f4e83c5cf90816349b474cb1901ed5d9cc7db9f5332 [stream]
+[debug] [2024-01-26T17:39:44.946Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/dailypaid/versions/c62edf7449ce96f7/files/c9b519a3507441c2c72ecb7a9009c7081539aa877cbba47d052c4e612163dc1f 200
+[debug] [2024-01-26T17:39:44.946Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/dailypaid/versions/c62edf7449ce96f7/files/c9b519a3507441c2c72ecb7a9009c7081539aa877cbba47d052c4e612163dc1f [stream]
+[debug] [2024-01-26T17:39:45.056Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/dailypaid/versions/c62edf7449ce96f7/files/d14eb968b7e40279c681f075a0636523ac381980a6d9350d21dc12cd3e6af71e 200
+[debug] [2024-01-26T17:39:45.056Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/dailypaid/versions/c62edf7449ce96f7/files/d14eb968b7e40279c681f075a0636523ac381980a6d9350d21dc12cd3e6af71e [stream]
+[debug] [2024-01-26T17:39:45.056Z] [hosting][upload queue][FINAL] {"max":1216,"min":1086,"avg":1136.3333333333333,"active":0,"complete":3,"success":3,"errored":0,"retried":0,"total":3,"elapsed":1217}
+[info] i  hosting: upload complete 
+[info] ✔  hosting[dailypaid]: file upload complete 
+[debug] [2024-01-26T17:39:45.057Z] [hosting] deploy completed after 1718ms
+[debug] [2024-01-26T17:39:45.057Z] [
+  {
+    "config": {
+      "public": "dist",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "./index.html"
+        }
+      ],
+      "site": "dailypaid"
+    },
+    "version": "projects/741154149574/sites/dailypaid/versions/c62edf7449ce96f7"
+  }
+]
+[info] i  hosting[dailypaid]: finalizing version... 
+[debug] [2024-01-26T17:39:45.060Z] >>> [apiv2][query] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/dailypaid/versions/c62edf7449ce96f7 updateMask=status%2Cconfig
+[debug] [2024-01-26T17:39:45.060Z] >>> [apiv2][body] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/dailypaid/versions/c62edf7449ce96f7 {"status":"FINALIZED","config":{"rewrites":[{"glob":"**","path":"./index.html"}]}}
+[debug] [2024-01-26T17:39:45.454Z] <<< [apiv2][status] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/dailypaid/versions/c62edf7449ce96f7 200
+[debug] [2024-01-26T17:39:45.454Z] <<< [apiv2][body] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/dailypaid/versions/c62edf7449ce96f7 {"name":"projects/741154149574/sites/dailypaid/versions/c62edf7449ce96f7","status":"FINALIZED","config":{"rewrites":[{"glob":"**","path":"./index.html"}]},"labels":{"deployment-tool":"cli-firebase"},"createTime":"2024-01-26T17:39:43.052215Z","createUser":{"email":"nguyenleduy1199@gmail.com"},"finalizeTime":"2024-01-26T17:39:45.380603Z","finalizeUser":{"email":"nguyenleduy1199@gmail.com"}}
+[debug] [2024-01-26T17:39:45.454Z] [hosting] finalized version for dailypaid:[object Object]
+[info] ✔  hosting[dailypaid]: version finalized 
+[info] i  hosting[dailypaid]: releasing new version... 
+[debug] [2024-01-26T17:39:45.457Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/dailypaid/channels/live/releases versionName=projects%2F741154149574%2Fsites%2Fdailypaid%2Fversions%2Fc62edf7449ce96f7
+[debug] [2024-01-26T17:39:45.457Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/dailypaid/channels/live/releases {}
+[debug] [2024-01-26T17:39:45.915Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/dailypaid/channels/live/releases 200
+[debug] [2024-01-26T17:39:45.915Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/dailypaid/channels/live/releases {"name":"projects/741154149574/sites/dailypaid/channels/live/releases/1706290785231000","version":{"name":"projects/741154149574/sites/dailypaid/versions/c62edf7449ce96f7","status":"FINALIZED","config":{"rewrites":[{"glob":"**","path":"./index.html"}]},"labels":{"deployment-tool":"cli-firebase"},"createTime":"2024-01-26T17:39:43.052215Z","createUser":{"email":"nguyenleduy1199@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/ACg8ocLOK-5vWvsCq2Ba_AgEXxFk3lEqTToTcrHqqnc2bpYCAbw"},"finalizeTime":"2024-01-26T17:39:45.380603Z","finalizeUser":{"email":"nguyenleduy1199@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/ACg8ocLOK-5vWvsCq2Ba_AgEXxFk3lEqTToTcrHqqnc2bpYCAbw"}},"type":"DEPLOY","releaseTime":"2024-01-26T17:39:45.231Z","releaseUser":{"email":"nguyenleduy1199@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/ACg8ocLOK-5vWvsCq2Ba_AgEXxFk3lEqTToTcrHqqnc2bpYCAbw"}}
+[debug] [2024-01-26T17:39:45.916Z] [hosting] release: {"name":"projects/741154149574/sites/dailypaid/channels/live/releases/1706290785231000","version":{"name":"projects/741154149574/sites/dailypaid/versions/c62edf7449ce96f7","status":"FINALIZED","config":{"rewrites":[{"glob":"**","path":"./index.html"}]},"labels":{"deployment-tool":"cli-firebase"},"createTime":"2024-01-26T17:39:43.052215Z","createUser":{"email":"nguyenleduy1199@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/ACg8ocLOK-5vWvsCq2Ba_AgEXxFk3lEqTToTcrHqqnc2bpYCAbw"},"finalizeTime":"2024-01-26T17:39:45.380603Z","finalizeUser":{"email":"nguyenleduy1199@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/ACg8ocLOK-5vWvsCq2Ba_AgEXxFk3lEqTToTcrHqqnc2bpYCAbw"}},"type":"DEPLOY","releaseTime":"2024-01-26T17:39:45.231Z","releaseUser":{"email":"nguyenleduy1199@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/ACg8ocLOK-5vWvsCq2Ba_AgEXxFk3lEqTToTcrHqqnc2bpYCAbw"}}
+[info] ✔  hosting[dailypaid]: release complete 
+[info] 
+[info] ✔  Deploy complete! 
+[info] 
+[info] Project Console: https://console.firebase.google.com/project/dailypaid/overview
+[info] Hosting URL: https://dailypaid.web.app
