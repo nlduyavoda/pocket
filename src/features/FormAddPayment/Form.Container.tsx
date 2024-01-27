@@ -1,16 +1,15 @@
-import { Expenses_keys } from "@utils/variables";
+import { Expenses_keys, defaultMonthlyExpenses } from "@utils/variables";
 import { Form } from "antd";
-import { FieldValues, useFormContext } from "react-hook-form";
-import { FormContent } from "./FormContent";
+import { FieldValues, useForm } from "react-hook-form";
+import { FormContent } from "./Form.Content";
 
-export const PocketForm = () => {
-  const methods = useFormContext();
+export const FormAdd = () => {
+  const methods = useForm({ defaultValues: defaultMonthlyExpenses });
   const formValues: FieldValues = methods.getValues();
   const formKeys = Object.keys(formValues) as Expenses_keys[];
-
   return (
     <Form
-      name="basic"
+      name="formAdd"
       layout="vertical"
       initialValues={{ remember: true }}
       autoComplete="off"

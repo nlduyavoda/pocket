@@ -3,9 +3,8 @@ import {
   Expenses_keys,
   MonthlyExpenses,
 } from "@utils/variables";
-import { Input, Typography } from "antd";
-import { Fragment } from "react";
 import { Controller, useFormContext } from "react-hook-form";
+import { SubContent } from "./Components/ SubContent";
 
 export const FormSubContent = ({
   keys,
@@ -23,16 +22,11 @@ export const FormSubContent = ({
       name={fieldName}
       render={({ field }) => {
         return (
-          <Fragment>
-            <Typography.Title className="text-white capitalize" level={5}>
-              {nestedLabel}
-            </Typography.Title>
-            <Input
-              placeholder={ExpenseProperties[field.name]}
-              value={field.value}
-              onChange={field.onChange}
-            />
-          </Fragment>
+          <SubContent
+            label={nestedLabel}
+            value={field.value}
+            onChange={field.onChange}
+          />
         );
       }}
     />

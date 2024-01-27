@@ -1,6 +1,5 @@
 import { PlusOutlined } from "@ant-design/icons";
 import { DrawerInternal } from "@components/DrawerInternal";
-import { PocketForm } from "@features/PocketForm";
 import {
   MonthlyExpenses,
   antDesignProviderTheme,
@@ -9,8 +8,9 @@ import {
 import { Button, ConfigProvider } from "antd";
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { FormAdd } from "./Form.Container";
 
-const DrawerFeature = ({
+const PaymentAdd = ({
   onAddPayment,
 }: {
   onAddPayment: (paymentProps: MonthlyExpenses) => void;
@@ -45,11 +45,11 @@ const DrawerFeature = ({
           onClose={onClose}
           onSubmit={methods.handleSubmit((formValues) => onsubmit(formValues))}
         >
-          <PocketForm />
+          <FormAdd />
         </DrawerInternal>
       </FormProvider>
     </ConfigProvider>
   );
 };
 
-export default DrawerFeature;
+export default PaymentAdd;

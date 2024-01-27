@@ -4,7 +4,7 @@ import { MonthlyExpenses } from "@utils/variables";
 import { useEffect, useState } from "react";
 import { addCollection, getCollection } from "./services/FireBaseMethods";
 import { TRANSACTIONS } from "./services/utils";
-import DrawerFeature from "@features/Drawer";
+import PaymentAdd from "@features/FormAddPayment";
 
 function App() {
   // TODO: Replace the following with your app's Firebase project configuration
@@ -44,7 +44,7 @@ function App() {
   return (
     <div className="App">
       {payment.length > 0 ? <PocketTable data={payment} /> : "loading"}
-      <DrawerFeature onAddPayment={onAddPaymentToFireBase} />
+      <PaymentAdd onAddPayment={onAddPaymentToFireBase} />
     </div>
   );
 }
