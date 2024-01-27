@@ -1,10 +1,9 @@
-import { DrawerInternal } from "@components/DrawerInternal";
 import { MonthlyExpenses } from "@utils/variables";
-import { Button, Form, Table } from "antd";
+import { Table, Tag } from "antd";
 import { ColumnType, ColumnsType } from "antd/es/table";
 import { useState } from "react";
-import { PocketColumn, flattenObject, getTableColumns } from "./utils";
 import { DrawerTable } from "./DrawerTable";
+import { PocketColumn, flattenObject, getTableColumns } from "./utils";
 
 export const PocketTable = (props: { data: MonthlyExpenses[] }) => {
   const { data } = props;
@@ -21,29 +20,15 @@ export const PocketTable = (props: { data: MonthlyExpenses[] }) => {
     setSelectedPayment(result);
   };
 
-  const dateColumn = (col: ColumnType<PocketColumn>) => {
-    return {
-      ...col,
-      render: (val: string, record: MonthlyExpenses) => {
-        return (
-          <div>
-            {val}
-            <Button
-              onClick={() => {
-                handleSelect(record?.id);
-              }}
-            >
-              detail
-            </Button>
-          </div>
-        );
-      },
-    };
-  };
   const columnsFilter = tableColumns
     .map((col: ColumnType<PocketColumn>) => {
-      if (col.key === "id") return false;
-      return col.key !== "date_added" ? col : dateColumn(col);
+      if (col?.key === "id") return false;
+      else {
+        return {
+          ...col,
+          render: (record: string) => <Tag>{record}</Tag>,
+        };
+      }
     })
     .filter(Boolean) as ColumnsType<any>;
 
@@ -54,6 +39,13 @@ export const PocketTable = (props: { data: MonthlyExpenses[] }) => {
         columns={columnsFilter}
         bordered
         scroll={{ x: 600, y: 300 }}
+        onRow={(record, rowIndex) => {
+          return {
+            onClick: (event) => {
+              handleSelect(record?.id);
+            },
+          };
+        }}
       />
       <DrawerTable
         selectedPayment={selectedPayment}

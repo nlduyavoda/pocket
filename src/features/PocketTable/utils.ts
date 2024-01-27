@@ -2,7 +2,6 @@ import {
   ExpenseCategories,
   ExpenseProperties,
   Expenses_keys,
-  MonthlyExpenses,
   NestedKeys,
 } from "@utils/variables";
 import { ColumnType, ColumnsType } from "antd/es/table";

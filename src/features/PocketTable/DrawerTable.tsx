@@ -1,6 +1,5 @@
 import { DrawerInternal } from "@components/DrawerInternal";
 import { Expenses_keys, MonthlyExpenses } from "@utils/variables";
-import { Form } from "antd";
 import { DrawerTableContent } from "./DrawerTableContent";
 
 export const DrawerTable = ({
@@ -17,15 +16,9 @@ export const DrawerTable = ({
       ? Object.keys(selectedPayment)
       : []) as Expenses_keys[]) || [];
   return (
-    <DrawerInternal
-      title={`ID: ${selectedPayment?.id}`}
-      open={open}
-      onClose={onClose}
-    >
+    <DrawerInternal title="Detail" open={open} onClose={onClose}>
       {selectedPayment && paymentKeys.length > 0 ? (
-        <Form>
-          <DrawerTableContent payment={selectedPayment} />
-        </Form>
+        <DrawerTableContent payment={selectedPayment} />
       ) : (
         "loading"
       )}

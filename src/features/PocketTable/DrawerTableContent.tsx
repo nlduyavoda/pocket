@@ -27,13 +27,15 @@ export const DrawerTableContent = ({
       } else {
         const childLabel = ExpenseProperties[key] || ExpenseCategories[key];
         return (
-          <FieldLabel
-            label={childLabel}
-            name={fieldKey}
-            key={fieldKey}
-            initialValue={obj[key]}
-            styles={{ width: "80%" }}
-          />
+          fieldKey !== "id" && (
+            <FieldLabel
+              label={childLabel}
+              name={fieldKey}
+              key={fieldKey}
+              initialValue={obj[key]}
+              styles={{ width: "80%" }}
+            />
+          )
         );
       }
     });
