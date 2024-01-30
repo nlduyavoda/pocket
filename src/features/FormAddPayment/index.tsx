@@ -5,10 +5,13 @@ import {
   antDesignProviderTheme,
   defaultMonthlyExpenses,
 } from "@utils/variables";
-import { Button, ConfigProvider } from "antd";
+import { Button, ConfigProvider, DrawerProps } from "antd";
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { FormAdd } from "./Form.Container";
+import { DrawerType } from "@components/DrawerInternal/Types";
+import { DrawerHeader, FormFooter } from "./Components/Drawer";
+import { drawerStyles } from "./Variables";
 
 const PaymentAdd = ({
   onAddPayment,
@@ -24,27 +27,37 @@ const PaymentAdd = ({
     setOpen(true);
   };
 
-  const onClose = () => {
+  const handleClose = () => {
     setOpen(false);
   };
 
   const onsubmit = (payment: MonthlyExpenses) => {
-    onAddPayment(payment);
-    onClose();
+    // onAddPayment(payment);
+    // onClose();
+    console.log("payment", payment);
+  };
+
+  const drawerProps: DrawerType & DrawerProps = {
+    title: <DrawerHeader label="date" date={methods.getValues("date_added")} />,
+    open,
+    onClose: handleClose,
+    closable: false,
+    footer: (
+      <FormFooter
+        onClose={handleClose}
+        onSubmit={methods.handleSubmit(onsubmit)}
+      />
+    ),
+    styles: drawerStyles,
   };
 
   return (
     <ConfigProvider theme={antDesignProviderTheme}>
       <FormProvider {...methods}>
         <Button onClick={showDrawer} icon={<PlusOutlined />}>
-          New account
+          Add Payment
         </Button>
-        <DrawerInternal
-          title="Create new"
-          open={open}
-          onClose={onClose}
-          onSubmit={methods.handleSubmit((formValues) => onsubmit(formValues))}
-        >
+        <DrawerInternal {...drawerProps}>
           <FormAdd />
         </DrawerInternal>
       </FormProvider>

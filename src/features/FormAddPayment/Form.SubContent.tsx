@@ -4,7 +4,7 @@ import {
   MonthlyExpenses,
 } from "@utils/variables";
 import { Controller, useFormContext } from "react-hook-form";
-import { SubContent } from "./Components/ SubContent";
+import { SubContent } from "./Components/SubContent";
 
 export const FormSubContent = ({
   keys,

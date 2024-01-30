@@ -3,7 +3,7 @@ import {
   Expenses_keys,
   MonthlyExpenses,
 } from "@utils/variables";
-import { Form, Input } from "antd";
+import { Form, Input, Typography } from "antd";
 import { Controller, useFormContext } from "react-hook-form";
 import { FormSubContent } from "./Form.SubContent";
 
@@ -18,37 +18,42 @@ export const FormContent = ({
   const subKeys = Object.keys(
     subValues
   ) as (keyof MonthlyExpenses[Expenses_keys])[];
+  const hidenFields = ["total_expenses", "id", "date_added"];
+
+  if (hidenFields.includes(categoryKeys)) return false;
   return (
-    categoryKeys !== "id" && (
-      <Form.Item label={ExpenseCategories[categoryKeys]}>
-        {typeof subValues === "object" ? (
-          subKeys.map((subKeys: keyof MonthlyExpenses[Expenses_keys], idx) => {
+    <Form.Item>
+      <Typography.Title className="text-white capitalize" level={3}>
+        {ExpenseCategories[categoryKeys]}
+      </Typography.Title>
+      {typeof subValues === "object" ? (
+        subKeys.map((subKeys: keyof MonthlyExpenses[Expenses_keys], idx) => {
+          return (
+            <FormSubContent
+              key={categoryKeys + idx}
+              keys={categoryKeys}
+              subKeys={subKeys}
+            />
+          );
+        })
+      ) : (
+        <Controller
+          control={methods.control}
+          name={categoryKeys}
+          render={({ field }) => {
             return (
-              <FormSubContent
-                key={categoryKeys + idx}
-                keys={categoryKeys}
-                subKeys={subKeys}
-              />
+              <Form.Item>
+                <Input
+                  placeholder={ExpenseCategories[categoryKeys]}
+                  value={field.value}
+                  onChange={field.onChange}
+                />
+              </Form.Item>
             );
-          })
-        ) : (
-          <Controller
-            control={methods.control}
-            name={categoryKeys}
-            render={({ field }) => {
-              return (
-                <Form.Item>
-                  <Input
-                    placeholder={ExpenseCategories[categoryKeys]}
-                    value={field.value}
-                    onChange={field.onChange}
-                  />
-                </Form.Item>
-              );
-            }}
-          />
-        )}
-      </Form.Item>
-    )
+          }}
+        />
+      )}
+    </Form.Item>
   );
 };
+

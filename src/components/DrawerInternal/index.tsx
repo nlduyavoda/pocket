@@ -1,5 +1,5 @@
-import { Button, Drawer, Space } from "antd";
-import { ReactNode } from "react";
+import { Drawer, DrawerProps } from "antd";
+import { DrawerType } from "./Types";
 
 export const DrawerInternal = ({
   onClose,
@@ -7,13 +7,8 @@ export const DrawerInternal = ({
   onSubmit,
   title = "",
   children,
-}: {
-  open: boolean;
-  onClose: () => void;
-  onSubmit?: () => void;
-  title: string;
-  children: ReactNode;
-}) => {
+  ...props
+}: DrawerType & DrawerProps) => {
   return (
     <Drawer
       title={title}
@@ -25,12 +20,7 @@ export const DrawerInternal = ({
           paddingBottom: 80,
         },
       }}
-      extra={
-        <Space>
-          <Button onClick={onClose}>Cancel</Button>
-          {onSubmit && <Button onClick={onSubmit}>Submit</Button>}
-        </Space>
-      }
+      {...props}
     >
       {children}
     </Drawer>
