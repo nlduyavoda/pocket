@@ -6,6 +6,7 @@ import {
 import { Form, Input, Typography } from "antd";
 import { Controller, useFormContext } from "react-hook-form";
 import { FormSubContent } from "./Form.SubContent";
+import { InputWithLabel } from "@components/Form/Input";
 
 export const FormContent = ({
   categoryKeys,
@@ -41,15 +42,7 @@ export const FormContent = ({
           control={methods.control}
           name={categoryKeys}
           render={({ field }) => {
-            return (
-              <Form.Item>
-                <Input
-                  placeholder={ExpenseCategories[categoryKeys]}
-                  value={field.value}
-                  onChange={field.onChange}
-                />
-              </Form.Item>
-            );
+            return <InputWithLabel />;
           }}
         />
       )}

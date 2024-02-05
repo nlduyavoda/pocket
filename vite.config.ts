@@ -17,7 +17,6 @@ function readAliasFromTsConfig(): Alias[] {
     },
     [] as Alias[]
   );
-  console.log("aliasConfig", aliasConfig);
   return aliasConfig;
 }
 

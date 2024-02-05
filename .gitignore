@@ -32,3 +32,6 @@ out/
 # Webpack
 .next-server/
 .webpack/
+
+#story-book
+/storybook-static
