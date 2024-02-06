@@ -42,7 +42,13 @@ export const FormContent = ({
           control={methods.control}
           name={categoryKeys}
           render={({ field }) => {
-            return <InputWithLabel />;
+            return (
+              <InputWithLabel
+                level={1}
+                title={categoryKeys}
+                value={field.value}
+              />
+            );
           }}
         />
       )}

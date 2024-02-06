@@ -4,7 +4,7 @@ import {
   MonthlyExpenses,
 } from "@utils/variables";
 import { Controller, useFormContext } from "react-hook-form";
-import { SubContent } from "./Components/SubContent";
+import { InputWithLabel } from "@components/Form/Input";
 
 export const FormSubContent = ({
   keys,
@@ -22,8 +22,9 @@ export const FormSubContent = ({
       name={fieldName}
       render={({ field }) => {
         return (
-          <SubContent
-            label={nestedLabel}
+          <InputWithLabel
+            level={4}
+            title={nestedLabel}
             value={field.value}
             onChange={field.onChange}
           />
