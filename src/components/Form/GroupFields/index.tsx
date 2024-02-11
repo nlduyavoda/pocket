@@ -1,15 +1,28 @@
 import { Typography } from "antd";
-import { InputWithLabel } from "@components/Form/Input";
+import { InputWithLabel } from "../Input";
 
-export const GroupFields = ({ groupTitle }: { groupTitle: string }) => {
-  const content = [1, 2, 3, 4, 5];
+export const GroupFields = ({
+  title,
+  groupItems,
+}: {
+  title: string;
+  groupItems: { label: string; value: string }[] | null;
+}) => {
   return (
     <div>
-      <Typography.Title level={3}>{groupTitle}</Typography.Title>
+      <Typography.Title level={3}>{title}</Typography.Title>
       <div className="ml-4">
-        {content.length > 0 &&
-          content.map((ele) => {
-            return <InputWithLabel title={`Input ${ele}`} level={5} />;
+        {groupItems &&
+          groupItems.map((item) => {
+            const { label, value } = item;
+            return (
+              <InputWithLabel
+                key={label}
+                title={label}
+                level={5}
+                value={value}
+              />
+            );
           })}
       </div>
     </div>

@@ -1,0 +1,44 @@
+{
+  "id": "id",
+  "date_added": "ngày",
+  "total_expenses": "tổng chi phí",
+  "housing": {
+    "rent_or_mortgage": "tiền thuê hoặc trả góp",
+    "utilities": "tiện ích",
+    "home_maintenance": "bảo dưỡng nhà cửa"
+  },
+  "transportation": {
+    "car_payment": "trả góp xe",
+    "insurance": "bảo hiểm",
+    "fuel": "nhiên liệu",
+    "public_transport": "giao thông công cộng"
+  },
+  "groceries": "thực phẩm",
+  "healthcare": {
+    "insurance": "bảo hiểm",
+    "prescriptions": "đơn thuốc",
+    "other_medical_expenses": "các chi phí y tế khác"
+  },
+  "entertainment": {
+    "dining_out": "ăn ngoại trời",
+    "subscriptions": "đăng ký",
+    "movies_and_events": "phim và sự kiện"
+  },
+  "personal_care": {
+    "haircuts": "cắt tóc",
+    "toiletries": "đồ dùng cá nhân"
+  },
+  "debts": {
+    "credit_card_payments": "thanh toán thẻ tín dụng",
+    "loan_payments": "thanh toán khoản vay"
+  },
+  "savings": {
+    "emergency_fund": "quỹ khẩn cấp",
+    "retirement": "hưu trí",
+    "other_savings": "tiết kiệm khác"
+  },
+  "other_expenses": {
+    "gifts_and_donations": "quà tặng và đóng góp",
+    "miscellaneous": "linh tinh"
+  }
+}
