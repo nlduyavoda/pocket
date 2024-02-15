@@ -91,6 +91,21 @@ const formatDatePicker = (date: string) => {
   return format(date, "dd/MMM/yyyy");
 };
 
+const onCalculatePrice = (value: any) => {
+  const prices = [0];
+  Object.keys(value).forEach((keys) => {
+    prices.push(+value[keys]);
+  });
+  return prices.reduce(
+    (accomulator: number, currentVal: number) => +accomulator + currentVal
+  );
+};
+
+const formatCurrency = (price: number): string => {
+  const nums = +price > 0 ? +price * 1000 : 0;
+  return nums.toLocaleString("en-US") + " đ";
+};
+
 export const flattenObject = (
   obj: Record<string, any>,
   parentKey = ""
@@ -99,15 +114,9 @@ export const flattenObject = (
 
   for (const key in obj) {
     if (typeof obj[key] === "object" && obj[key] !== null) {
-      const childVal = obj[key];
-      const prices = [0];
-      Object.keys(childVal).forEach((keys) => {
-        prices.push(+childVal[keys]);
-      });
-      const totalPrice = prices.reduce(
-        (accomulator: number, currentVal: number) => +accomulator + currentVal
-      );
-      result[key] = totalPrice;
+      const amountOfPrice = onCalculatePrice(obj[key]);
+      const price = formatCurrency(amountOfPrice);
+      result[key] = price;
     } else {
       const newKey = parentKey ? `${parentKey}.${key}` : key;
       switch (key) {
@@ -115,7 +124,7 @@ export const flattenObject = (
           result[newKey] = formatDatePicker(obj[key]);
           break;
         default:
-          result[newKey] = obj[key];
+          result[newKey] = formatCurrency(obj[key]);
       }
     }
   }
