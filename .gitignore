@@ -32,7 +32,6 @@ out/
 # Webpack
 .next-server/
 .webpack/
-/dist
-
+dist/
 #story-book
 /storybook-static
