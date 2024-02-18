@@ -1,25 +1,22 @@
 import { PlusOutlined } from "@ant-design/icons";
 import { DrawerInternal } from "@components/DrawerInternal";
 import {
-  MonthlyExpenses,
   antDesignProviderTheme,
-  defaultMonthlyExpenses,
+  defaultEventProperties,
 } from "@utils/variables";
 import { Button, ConfigProvider, DrawerProps } from "antd";
 import { useState } from "react";
-import { FormProvider, useForm } from "react-hook-form";
-import { FormAdd } from "./Form.Container";
+import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { DrawerType } from "@components/DrawerInternal/Types";
-import { DrawerHeader, FormFooter } from "./Components/Drawer";
-import { drawerStyles } from "./Variables";
+import { drawerStyles } from "@features/FormAddPayment/Variables";
+import { FormFooter as Footer } from "@components/Form/Footer";
+import { FormAdd } from "./FormAdd";
+import { addDocument_ } from "@services/FireBaseMethods";
+import { EVENTS } from "@services/utils";
 
-const PaymentAdd = ({
-  onAddPayment,
-}: {
-  onAddPayment: (paymentProps: MonthlyExpenses) => void;
-}) => {
-  const methods = useForm<MonthlyExpenses>({
-    defaultValues: defaultMonthlyExpenses,
+export const FormAddEvent = () => {
+  const methods = useForm<any>({
+    defaultValues: defaultEventProperties,
   });
   const [open, setOpen] = useState<boolean>(false);
 
@@ -31,21 +28,24 @@ const PaymentAdd = ({
     setOpen(false);
   };
 
-  const onsubmit = (payment: MonthlyExpenses) => {
-    onAddPayment(payment);
-    handleClose();
+  const onSubmit = (props: SubmitHandler<any>) => {
+    addDocument_({
+      data: props,
+      documentName: EVENTS,
+    });
+    // onClose();
   };
 
   const drawerProps: DrawerType & DrawerProps = {
-    title: <DrawerHeader label="date" date={methods.getValues("date_added")} />,
+    title: <>Add Event</>,
     open,
     onClose: handleClose,
     closable: false,
     footer: (
-      <FormFooter
+      <Footer
         onClose={handleClose}
-        onSubmit={methods.handleSubmit(onsubmit)}
-      />
+        onSubmit={methods.handleSubmit(onSubmit)}
+      ></Footer>
     ),
     styles: drawerStyles,
   };
@@ -54,7 +54,7 @@ const PaymentAdd = ({
     <ConfigProvider theme={antDesignProviderTheme}>
       <FormProvider {...methods}>
         <Button onClick={showDrawer} icon={<PlusOutlined />}>
-          Add Payment
+          Add Event
         </Button>
         <DrawerInternal {...drawerProps}>
           <FormAdd />
@@ -63,5 +63,3 @@ const PaymentAdd = ({
     </ConfigProvider>
   );
 };
-
-export default PaymentAdd;
