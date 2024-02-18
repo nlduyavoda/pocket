@@ -32,9 +32,8 @@ const PaymentAdd = ({
   };
 
   const onsubmit = (payment: MonthlyExpenses) => {
-    // onAddPayment(payment);
-    // onClose();
-    console.log("payment", payment);
+    onAddPayment(payment);
+    handleClose();
   };
 
   const drawerProps: DrawerType & DrawerProps = {

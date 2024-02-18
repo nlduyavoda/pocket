@@ -9,3 +9,5 @@ export const firebaseConfig = {
 
 export const defaultCollection = "DailyPayment";
 export const TRANSACTIONS = "transactions";
+export const EVENTS = "events";
+

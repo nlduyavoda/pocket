@@ -29,7 +29,9 @@
       "@features/*": ["features/*"],
       "@components/*": ["components/*"],
       "@layouts/*": ["layouts/*"],
-      "@styles/*": ["styles/*"]
+      "@styles/*": ["styles/*"],
+      "@services/*": ["services/*"],
+      "@routers/*": ["routers/*"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],

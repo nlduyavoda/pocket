@@ -1,5 +1,19 @@
+import { format } from "date-fns";
+
 export const sum = (a: number, b: number) => {
   return a + b;
+};
+
+export const formatDate = (date: string) => {
+  return format(new Date(date), "dd / MMMM / yyy");
+};
+
+export const format_TimestampToDate = (time: any) => {
+  // Combine seconds and nanoseconds into a single timestamp
+  const timestamp = time.seconds + time.nanoseconds / 1e9;
+
+  // Convert to a Date object
+  return new Date(timestamp * 1000); // JavaScript uses milliseconds, so multiply by 1000
 };
 
 export const antDesignProviderTheme = {
@@ -18,10 +32,10 @@ export const antDesignProviderTheme = {
   },
 };
 
-
 export type MonthlyExpenses = {
   id: string;
   date_added: string;
+  event: string;
   housing: {
     rent_or_mortgage: number;
     utilities: number;
@@ -68,6 +82,7 @@ export type ExpenseType<T extends string> = { [K in T]: string };
 
 export const ExpenseCategories: ExpenseType<keyof MonthlyExpenses> = {
   id: "id",
+  event: "sự kiện",
   date_added: "ngày",
   housing: "nhà ở",
   transportation: "giao thông",
@@ -104,12 +119,18 @@ export const ExpenseProperties = {
   gifts_and_donations: "quà tặng và đóng góp",
   miscellaneous: "linh tinh",
 };
+export const defaultEventProperties: any = {
+  title: "default event title",
+  startDate: new Date(),
+  endDate: new Date(),
+};
 
 // Example usage
 export const defaultMonthlyExpenses: MonthlyExpenses = {
   id: "",
   date_added: "2024-01-10T12:00:00Z",
-  total_expenses: 2770, // Sum of all expenses
+  total_expenses: 2770, // Sum of all expenses,
+  event: "",
   housing: {
     rent_or_mortgage: 1000,
     utilities: 15000,
@@ -165,4 +186,3 @@ type DataType = {
 };
 export type SubChild1<T extends Expenses_keys> = { [K in T]: DataType };
 export type Child1 = SubChild1<Expenses_keys>;
-

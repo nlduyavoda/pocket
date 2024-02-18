@@ -1,12 +1,50 @@
-import { collection, doc, getDocs, setDoc } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  doc,
+  getDocs,
+  setDoc,
+  query,
+  where,
+  getDoc,
+  DocumentData,
+  DocumentReference,
+} from "firebase/firestore";
 import { fireStore } from "./FireBaseConfig";
 import {
   AddCollection,
+  AddDocumentType,
   DocumentType,
   FetchResType,
   GetCollection,
 } from "./Types";
-import { TRANSACTIONS } from "./utils";
+import { EVENTS, TRANSACTIONS } from "./utils";
+import { EventType } from "react-hook-form";
+import { formatDate, format_TimestampToDate } from "@utils/variables";
+import { format } from "date-fns";
+
+const formatDocumentSnap = (snap: any) => {
+  const result: Array<unknown> = [];
+  snap.forEach((doc: any) => {
+    console.log("doc", doc);
+    if (doc.id) {
+      const data = doc.data();
+      result.push({ id: doc.id, ...data });
+    }
+  });
+
+  if (result.length > 0) {
+    return {
+      status: "ok",
+      data: result,
+    };
+  } else {
+    return {
+      status: "fail",
+      data: [],
+    };
+  }
+};
 
 export const addCollection = async ({
   collectionName = TRANSACTIONS,
@@ -73,5 +111,67 @@ export const addDocument = async ({
       status: "fail",
       data: null,
     };
+  }
+};
+
+const getRefDocument = async (
+  docRef: DocumentReference<unknown, DocumentData>
+): Promise<FetchResType> => {
+  const docSnap = await getDoc(docRef);
+  if (docSnap.exists()) {
+    return { status: "ok", data: JSON.stringify(docSnap.data()) };
+  } else {
+    return { status: "fail", data: null };
+  }
+};
+
+type RefDocResponseType = Omit<FetchResType, "data"> & {
+  data: string;
+};
+
+export const addDocument_ = async ({
+  documentName,
+  data,
+}: Partial<AddDocumentType>): Promise<FetchResType> => {
+  try {
+    const formatData = {
+      ...data,
+      startDate: formatDate(data.startDate),
+      endDate: formatDate(data.endDate),
+    };
+    const docRef = await addDoc(collection(fireStore, EVENTS), formatData);
+    const res = await getRefDocument(docRef);
+    const { data: result, status } = res as RefDocResponseType;
+    return {
+      status,
+      data: result,
+    };
+  } catch (error) {
+    const failResult: FetchResType = {
+      status: "fail",
+      data: null,
+    };
+    if (!documentName) {
+      return await {
+        ...failResult,
+        message: "document's name is required",
+      };
+    }
+    return failResult;
+  }
+};
+
+export const findDocumentById = async ({
+  documentName = EVENTS,
+  eventId,
+}: {
+  documentName: string;
+  eventId: string;
+}): Promise<FetchResType> => {
+  try {
+    const docRef = doc(fireStore, documentName, eventId);
+    return await getRefDocument(docRef);
+  } catch (error) {
+    return { status: "fail", data: null, message: "Error getting document" };
   }
 };

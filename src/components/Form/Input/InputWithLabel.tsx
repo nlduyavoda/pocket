@@ -1,7 +1,7 @@
 import { Form, FormItemProps, Input, InputProps, Typography } from "antd";
 
 export type InputWithLabelPropsType = {
-  title: string;
+  label: string;
   errorMessage?: string;
   level: 1 | 5 | 2 | 3 | 4 | undefined;
 } & InputProps &
@@ -9,7 +9,7 @@ export type InputWithLabelPropsType = {
 
 export const InputWithLabel = ({
   level,
-  title,
+  label,
   errorMessage,
   ...inputProps
 }: InputWithLabelPropsType) => {
@@ -20,7 +20,7 @@ export const InputWithLabel = ({
   return (
     <Form.Item {...formItemProps}>
       <Typography.Title className="capitalize" level={level || 5}>
-        {title || "This is label"}
+        {label || "This is label"}
       </Typography.Title>
       <Input defaultValue="Hello, antd!" {...inputProps} />
     </Form.Item>
