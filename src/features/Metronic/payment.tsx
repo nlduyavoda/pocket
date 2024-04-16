@@ -1,6 +1,7 @@
-import { Button, Table } from "antd";
+import { OverviewTable } from "@features/PocketTable/OverviewTable";
+import { Button } from "antd";
 
-export const Payment = (props: any) => {
+export const Payment = () => {
   return (
     <div className="flex-wrap w-full">
       <div className="flex w-full justify-between">
@@ -13,46 +14,7 @@ export const Payment = (props: any) => {
           <Button>Create</Button>
         </div>
       </div>
-      <div>
-        <TablePayment />
-      </div>
+      <OverviewTable />
     </div>
   );
-};
-
-const TablePayment = () => {
-  const dataSource = [
-    {
-      key: "1",
-      product: "Mike",
-      earnings: 32,
-      company: "10 Downing Street",
-    },
-    {
-      key: "2",
-      product: "John",
-      earnings: 42,
-      company: "10 Downing Street",
-    },
-  ];
-
-  const columns = [
-    {
-      title: "Product",
-      dataIndex: "product",
-      key: "product",
-    },
-    {
-      title: "EARNINGS",
-      dataIndex: "earnings",
-      key: "earnings",
-    },
-    {
-      title: "COMPANY",
-      dataIndex: "company",
-      key: "company",
-    },
-  ];
-
-  return <Table dataSource={dataSource} columns={columns} />;
 };

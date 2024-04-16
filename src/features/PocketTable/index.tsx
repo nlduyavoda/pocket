@@ -1,22 +1,20 @@
+import PaymentAdd from "@features/FormAddPayment";
 import { MonthlyExpenses } from "@utils/variables";
 import { Table, Tag } from "antd";
 import { ColumnType, ColumnsType } from "antd/es/table";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { DrawerTable } from "./DrawerTable";
-import { PocketColumn, flattenObject, getTableColumns } from "./utils";
-import { addCollection, getCollection } from "@services/FireBaseMethods";
-import { TRANSACTIONS } from "@services/utils";
-import { onFilterPayment } from "@utils/PaymentController/Transactions";
-import PaymentAdd from "@features/FormAddPayment";
+import { usePayment } from "./usePayment";
+import { useTable } from "./useTable";
+import { PocketColumn } from "./utils";
+import { TableOverview } from "@components/Table";
 
 export const PocketTable = () => {
-  const [payment, setPayment] = useState<MonthlyExpenses[]>([]);
+  const { payment, addPayment } = usePayment();
+  const { tableData, tableColumns } = useTable(payment);
   const [selectedPayment, setSelectedPayment] =
     useState<MonthlyExpenses | null>(null);
   const [open, setOpen] = useState(false);
-  const tableData = payment.map((ele: MonthlyExpenses) => flattenObject(ele));
-  const tableColumns: ColumnsType<any> =
-    payment.length > 0 ? getTableColumns(payment[0]) : [];
 
   const handleSelect = (paymentId: string) => {
     setOpen(true);
@@ -25,58 +23,32 @@ export const PocketTable = () => {
     setSelectedPayment(result);
   };
 
-  const columnsFilter = tableColumns
-    .map((col: ColumnType<PocketColumn>) => {
-      if (col?.key === "id") return false;
-      else {
-        return {
-          ...col,
-          render: (record: string) => <Tag>{record}</Tag>,
-        };
-      }
-    })
-    .filter(Boolean) as ColumnsType<any>;
-
-  const onAddPaymentToFireBase = async (paymentProps: MonthlyExpenses) => {
-    const dataCloned = [...payment];
-    dataCloned.unshift(paymentProps);
-    const { status } = await addCollection({
-      documentName: TRANSACTIONS,
-      data: paymentProps,
-    });
-    if (status === "ok") {
-      setPayment(dataCloned);
-    } else {
-      console.log("fail");
-    }
-  };
-
-  useEffect(() => {
-    async function getAsyncCollection() {
-      const response = (await getCollection({
-        documentName: TRANSACTIONS,
-      })) as { status: "fail" | "ok"; data: MonthlyExpenses[] };
-      const { status, data } = response;
-      if (status === "ok" && data) {
-        const filterData: MonthlyExpenses[] = data.map((payment) => {
-          return onFilterPayment(payment);
-        });
-        setPayment(filterData);
-      } else {
-        console.log("getCollection fail");
-      }
-    }
-    getAsyncCollection();
-  }, []);
   return (
-    <>
+    <div>
       {payment.length > 0 ? (
         <>
+          <TableOverview
+            dataSource={tableData}
+            columns={tableColumns}
+            onSelect={handleSelect}
+          />
           <Table
             dataSource={tableData}
-            columns={columnsFilter}
+            columns={
+              tableColumns
+                .map((col: ColumnType<PocketColumn>) => {
+                  if (col?.key === "id") return false;
+                  else {
+                    return {
+                      ...col,
+                      render: (record: string) => <Tag>{record}</Tag>,
+                    };
+                  }
+                })
+                .filter(Boolean) as ColumnsType<any>
+            }
             bordered
-            scroll={{ x: 600, y: 300 }}
+            scroll={{ y: 120 }}
             onRow={(record, rowIndex) => {
               return {
                 onClick: (event) => {
@@ -94,7 +66,7 @@ export const PocketTable = () => {
       ) : (
         "loading"
       )}
-      <PaymentAdd onAddPayment={onAddPaymentToFireBase} />
-    </>
+      <PaymentAdd onAddPayment={addPayment} />
+    </div>
   );
 };

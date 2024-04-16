@@ -7,9 +7,6 @@ export const MetronicPage = () => {
     <MetronicLayout>
       <Overview />
       <Payment />
-      {/* {[1, 2, 3, 4].map((ele) => {
-        return <div key={ele}>block {ele + 1}</div>;
-      })} */}
     </MetronicLayout>
   );
 };
