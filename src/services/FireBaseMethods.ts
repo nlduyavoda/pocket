@@ -1,14 +1,14 @@
+import { formatDate } from "@utils/variables";
 import {
+  DocumentData,
+  DocumentReference,
   addDoc,
   collection,
   doc,
+  getDoc,
+  getDocFromCache,
   getDocs,
   setDoc,
-  query,
-  where,
-  getDoc,
-  DocumentData,
-  DocumentReference,
 } from "firebase/firestore";
 import { fireStore } from "./FireBaseConfig";
 import {
@@ -19,9 +19,6 @@ import {
   GetCollection,
 } from "./Types";
 import { EVENTS, TRANSACTIONS } from "./utils";
-import { EventType } from "react-hook-form";
-import { formatDate, format_TimestampToDate } from "@utils/variables";
-import { format } from "date-fns";
 
 const formatDocumentSnap = (snap: any) => {
   const result: Array<unknown> = [];
@@ -161,6 +158,35 @@ export const addDocument_ = async ({
   }
 };
 
+export const findDocumentById_ = async ({
+  documentName = EVENTS,
+  id,
+}: {
+  documentName: string;
+  id: string;
+}): Promise<FetchResType> => {
+  try {
+    const docRef = doc(fireStore, documentName, id);
+
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      return {
+        status: "ok",
+        data: docSnap.data(),
+      };
+    } else {
+      // docSnap.data() will be undefined in this case
+      return {
+        status: "ok",
+        data: [],
+        message: "No such document!",
+      };
+    }
+  } catch (error) {
+    return { status: "fail", data: null, message: "Error getting document" };
+  }
+};
+
 export const findDocumentById = async ({
   documentName = EVENTS,
   eventId,
@@ -170,7 +196,10 @@ export const findDocumentById = async ({
 }): Promise<FetchResType> => {
   try {
     const docRef = doc(fireStore, documentName, eventId);
-    return await getRefDocument(docRef);
+
+    const res = await getRefDocument(docRef);
+    console.log("res", res);
+    return res;
   } catch (error) {
     return { status: "fail", data: null, message: "Error getting document" };
   }

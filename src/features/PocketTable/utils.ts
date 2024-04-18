@@ -114,12 +114,17 @@ export const flattenObject = (
 
   for (const key in obj) {
     if (typeof obj[key] === "object" && obj[key] !== null) {
-      const amountOfPrice = onCalculatePrice(obj[key]);
-      const price = formatCurrency(amountOfPrice);
-      result[key] = price;
+      if (key !== "id") {
+        const amountOfPrice = onCalculatePrice(obj[key]);
+        const price = formatCurrency(amountOfPrice);
+        result[key] = price;
+      }
     } else {
       const newKey = parentKey ? `${parentKey}.${key}` : key;
       switch (key) {
+        case "id":
+          result[newKey] = obj[key];
+          break;
         case "date_added":
           result[newKey] = formatDatePicker(obj[key]);
           break;
@@ -128,6 +133,5 @@ export const flattenObject = (
       }
     }
   }
-
   return result;
 };

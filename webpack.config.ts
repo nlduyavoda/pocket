@@ -22,6 +22,7 @@ module.exports = {
       "@features": path.resolve(__dirname, "src/features/"),
       "@components": path.resolve(__dirname, "src/components/"),
       "@layouts": path.resolve(__dirname, "src/layouts/"),
+      "@api": path.resolve(__dirname, "src/api/"),
     },
   },
   output: {
