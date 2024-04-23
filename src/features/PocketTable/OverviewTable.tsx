@@ -18,7 +18,14 @@ export const OverviewTable = () => {
     .map((col: ColumnType<PocketColumn>) => ({
       ...col,
       render: (record: string, item: any) => (
-        <Tag onClick={() => navigate(`/transactions/${item.id}`)}>{record}</Tag>
+        <Tag
+          onClick={() => {
+            navigate(`/transactions/${item.id}`);
+            // onSet(item.id);
+          }}
+        >
+          {record}
+        </Tag>
       ),
     }))
     .filter(Boolean) as ColumnsType<any>;

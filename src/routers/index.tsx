@@ -18,7 +18,7 @@ export const routers = createBrowserRouter([
   },
   {
     path: END_POINTS.TRANSACTION,
-    element: <TransactionDetail />,
+    element: <MetronicPage />,
     errorElement: <>Error</>,
   },
   {
