@@ -19,6 +19,7 @@ export const OverviewTable = () => {
       ...col,
       render: (record: string, item: any) => (
         <Tag
+          key={item.id || item.label}
           onClick={() => {
             navigate(`/transactions/${item.id}`);
             // onSet(item.id);

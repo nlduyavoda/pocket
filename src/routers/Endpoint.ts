@@ -3,4 +3,5 @@ export const END_POINTS = {
   EVENTS: `/events`,
   EVENTS_DETAIL: "/events/:eventId",
   TRANSACTION: "/transactions/:transactionId",
+  TRANSACTIONS_NEW: "/transactions/new",
 };

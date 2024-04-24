@@ -14,11 +14,25 @@ export const routers = createBrowserRouter([
   {
     path: END_POINTS.HOME,
     element: <MetronicPage />,
+    loader: () => {
+      return { overviewContext: "overview" };
+    },
     errorElement: <>Error</>,
   },
   {
     path: END_POINTS.TRANSACTION,
     element: <MetronicPage />,
+    loader: ({ params }) => {
+      return { overviewContext: "detail", transactionId: params.transactionId };
+    },
+    errorElement: <>Error</>,
+  },
+  {
+    path: END_POINTS.TRANSACTIONS_NEW,
+    element: <MetronicPage />,
+    loader: () => {
+      return { overviewContext: "form" };
+    },
     errorElement: <>Error</>,
   },
   {
