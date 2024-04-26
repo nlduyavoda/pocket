@@ -11,6 +11,5 @@ export const useDataSource = (sourceProps, onfetch, sourceName) => {
     }
     onfetchDataSource();
   }, []);
-
   return { [`${sourceName}`]: dataSource, isloading };
 };

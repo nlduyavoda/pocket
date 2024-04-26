@@ -53,7 +53,6 @@ export const FormAddEvent = ({
 
     if (status === "ok") {
       const responseData = JSON.parse(data) as EventType;
-      console.log("responseData", responseData);
       const { startDate, endDate, title } = responseData;
       const event = {
         title,

@@ -15,15 +15,15 @@ export const Payment = () => {
   const navigate = useNavigate();
   const handleNavigate = (route: string) => navigate(route);
 
-  if (transactionId) {
-    return (
-      <OverviewLayout
-        renderControl={() => DetailControl({ onNavigate: handleNavigate })}
-      >
-        {() => PaymentDetail({ transactionId })}
-      </OverviewLayout>
-    );
-  }
+  // if (transactionId) {
+  //   return (
+  //     <OverviewLayout
+  //       renderControl={() => DetailControl({ onNavigate: handleNavigate })}
+  //     >
+  //       {() => PaymentDetail({ transactionId })}
+  //     </OverviewLayout>
+  //   );
+  // }
   return paymentChildren.map((payment) => {
     return (
       payment.key === overviewContext && (
@@ -44,7 +44,7 @@ const PaymentOverview = () => {
   return <OverviewTable />;
 };
 
-const PaymentDetail = ({ transactionId }) => {
+const PaymentDetail = ({ transactionId }: { transactionId: string }) => {
   return <TransactionDetail id={transactionId} />;
 };
 

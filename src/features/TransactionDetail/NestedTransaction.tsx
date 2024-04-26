@@ -1,6 +1,7 @@
 import { Form, Input } from "antd";
 
-export const NestedTransaction = ({ transactions }) => {
+export const NestedTransaction = ({ data }) => {
+  const transactions = data;
   const formItemLayout = {
     labelCol: {
       xs: { span: 24 },
@@ -11,6 +12,7 @@ export const NestedTransaction = ({ transactions }) => {
       sm: { span: 14 },
     },
   };
+  console.log(transactions);
   return (
     <Form
       className="h-[500px] overflow-auto rounded-[20px] pt-[20px]"
@@ -18,7 +20,7 @@ export const NestedTransaction = ({ transactions }) => {
       variant="filled"
       style={{ maxWidth: 600 }}
     >
-      <PaymentsWrapper transactions={transactions} render={PaymentsWrapper} />
+      {/* <PaymentsWrapper transactions={transactions} render={PaymentsWrapper} /> */}
     </Form>
   );
 };

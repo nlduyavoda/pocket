@@ -8,7 +8,7 @@ export type AddCollection = {
 
 export type GetCollection = {
   collectionName?: string;
-  documentName: string;
+  documentName?: string;
 };
 
 export type AddDocumentType = {
