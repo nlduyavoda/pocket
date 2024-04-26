@@ -5,7 +5,7 @@ import { Payment } from "./payment";
 export const MetronicPage = () => {
   return (
     <MetronicLayout>
-      <Overview />
+      {/* <Overview /> */}
       <Payment />
     </MetronicLayout>
   );

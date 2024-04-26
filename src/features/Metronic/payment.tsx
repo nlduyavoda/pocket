@@ -4,6 +4,7 @@ import { OverviewLayout } from "@layouts/MetronicLayout/PaymentLayout";
 import { END_POINTS } from "@routers/Endpoint";
 import { Button } from "antd";
 import { useLoaderData, useNavigate } from "react-router-dom";
+import { FormFields } from "./FormField";
 
 export const Payment = () => {
   const { overviewContext = "overview", transactionId = "" } =
@@ -19,7 +20,7 @@ export const Payment = () => {
       <OverviewLayout
         renderControl={() => DetailControl({ onNavigate: handleNavigate })}
       >
-        {() => PaymentDetail({ transactionId: transactionId })}
+        {() => PaymentDetail({ transactionId })}
       </OverviewLayout>
     );
   }
@@ -46,8 +47,9 @@ const PaymentOverview = () => {
 const PaymentDetail = ({ transactionId }) => {
   return <TransactionDetail id={transactionId} />;
 };
+
 const PaymentForm = () => {
-  return <h1>PaymentForm</h1>;
+  return <FormFields />;
 };
 
 const OverViewControl_ = ({
@@ -100,7 +102,7 @@ const paymentChildren = [
   },
   {
     key: "form",
-    children: PaymentForm,
+    children: FormFields,
     renderControl: FormControl,
   },
 ];
