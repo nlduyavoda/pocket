@@ -33,7 +33,9 @@
       "@services/*": ["services/*"],
       "@routers/*": ["routers/*"],
       "@api/*": ["api/*"],
-      "@hooks/*": ["hooks/*"]
+      "@hooks/*": ["hooks/*"],
+      "@types/*": ["types/*"],
+      "@hocs/*": ["hocs/*"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],

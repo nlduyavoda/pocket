@@ -1,12 +1,12 @@
 import { MetronicLayout } from "@layouts/MetronicLayout";
-import { Overview } from "./overview";
-import { Payment } from "./payment";
+// import Payments from "@features/PocketTable/OverviewTable";
 
 export const MetronicPage = () => {
   return (
     <MetronicLayout>
+      <></>
+      {/* <Payments /> */}
       {/* <Overview /> */}
-      <Payment />
     </MetronicLayout>
   );
 };

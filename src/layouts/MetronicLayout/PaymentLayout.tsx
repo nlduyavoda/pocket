@@ -1,10 +1,9 @@
 export const OverviewLayout = ({ children, ...props }) => {
   const renderControl = props.renderControl();
-  const renderChildren = children();
   return (
     <div className="flex-wrap w-full overflow-auto">
       {renderControl}
-      {renderChildren}
+      {children}
     </div>
   );
 };

@@ -8,6 +8,8 @@ import {
   getDoc,
   getDocFromCache,
   getDocs,
+  query,
+  where,
   setDoc,
 } from "firebase/firestore";
 import { fireStore } from "./FireBaseConfig";
@@ -44,15 +46,54 @@ const formatDocumentSnap = (snap: any) => {
 };
 
 export const addCollection = async ({
-  collectionName = TRANSACTIONS,
+  collectionName = "",
   data,
 }: AddCollection): Promise<FetchResType> => {
   try {
     const citiesRef = collection(fireStore, collectionName);
-    const result = await setDoc(doc(citiesRef), data);
-    return { status: "ok", data: result };
+    data.createAt = data.createAt.toISOString();
+    await setDoc(doc(citiesRef), data);
+    return { status: "ok", data, message: "Document successfully written!" };
+  } catch (error: any) {
+    console.log("error", error);
+    const { message = "" } = error;
+    return { status: "fail", data: [], message };
+  }
+};
+
+export const findDocumentsByDate = async ({
+  collectionName,
+  date,
+}: {
+  collectionName: string;
+  date: string;
+}): Promise<FetchResType> => {
+  try {
+    const collectionRef = collection(fireStore, collectionName);
+    const q = query(collectionRef, where("createAt", "==", date));
+
+    const querySnapshot = await getDocs(q);
+    const result: Array<unknown> = [];
+    querySnapshot.forEach((doc) => {
+      if (doc.id) {
+        const data = doc.data();
+        result.push({ id: doc.id, ...data });
+      }
+    });
+    if (result.length > 0) {
+      return {
+        status: "ok",
+        data: result,
+      };
+    } else {
+      return {
+        status: "ok",
+        data: [],
+        message: "No documents found!",
+      };
+    }
   } catch (error) {
-    return { status: "ok", data: null };
+    return { status: "fail", data: null, message: "Error getting documents" };
   }
 };
 
@@ -139,6 +180,7 @@ export const addDocument_ = async ({
     const docRef = await addDoc(collection(fireStore, EVENTS), formatData);
     const res = await getRefDocument(docRef);
     const { data: result, status } = res as RefDocResponseType;
+    console.log("res", res);
     return {
       status,
       data: result,

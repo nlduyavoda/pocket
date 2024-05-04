@@ -2,7 +2,7 @@ import { MonthlyExpenses } from "@utils/variables";
 
 export type AddCollection = {
   collectionName?: string;
-  documentName: string;
+  documentName?: string;
   data: any;
 };
 

@@ -1,4 +1,6 @@
+import { getCollection } from "@services/FireBaseMethods";
 import { useEffect, useState } from "react";
+import { RequestType } from "./type";
 
 export const useDataSource = (sourceProps, onfetch, sourceName) => {
   const [dataSource, setDataSource] = useState<any>(null);
@@ -13,3 +15,13 @@ export const useDataSource = (sourceProps, onfetch, sourceName) => {
   }, []);
   return { [`${sourceName}`]: dataSource, isloading };
 };
+
+export async function fetchDataSource(sourceName: string): RequestType {
+  const response = await getCollection({
+    collectionName: sourceName,
+  });
+  return {
+    sourceName: sourceName,
+    data: response.status === "ok" ? response.data : [],
+  };
+}

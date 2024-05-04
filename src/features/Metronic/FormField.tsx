@@ -43,7 +43,7 @@ export const FormFields = () => {
   };
 
   return (
-    <Form onFinish={handleSubmit(onSubmit)}>
+    <Form className="h-[30vh] overflow-auto" onFinish={handleSubmit(onSubmit)}>
       {fields.map((field, index) => (
         <Space
           key={field.id}

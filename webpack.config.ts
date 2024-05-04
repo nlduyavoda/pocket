@@ -23,6 +23,8 @@ module.exports = {
       "@components": path.resolve(__dirname, "src/components/"),
       "@layouts": path.resolve(__dirname, "src/layouts/"),
       "@api": path.resolve(__dirname, "src/api/"),
+      "@types": path.resolve(__dirname, "src/types/"),
+      "@hocs": path.resolve(__dirname, "src/hocs/"),
     },
   },
   output: {

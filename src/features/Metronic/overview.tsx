@@ -1,16 +1,12 @@
 import { Button, Progress } from "antd";
 
 export const Overview = (props: any) => {
-  return (
-    <div {...props}>
-      <Content />
-    </div>
-  );
+  return <Content />;
 };
 
 const Content = () => {
   return (
-    <div className="rounded-[20px] w-full text-[#181c32]">
+    <div className="w-[300px] rounded-[20px] text-[#181c32]">
       <div className="flex justify-between">
         <p>title</p>
         <div>option</div>
