@@ -8,6 +8,7 @@
     }
   },
   "dependencies": {
+    "@ant-design/icons": "^5.3.7",
     "@babel/core": "^7.23.9",
     "@babel/preset-react": "^7.23.3",
     "@storybook/builder-vite": "^7.6.12",

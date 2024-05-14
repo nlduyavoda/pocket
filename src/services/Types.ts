@@ -20,7 +20,7 @@ export type AddDocumentType = {
 export type FetchResType = {
   status: "ok" | "fail";
   data: unknown;
-  message?: string;
+  message?: string | unknown;
 };
 
 export interface DocumentType extends MonthlyExpenses {}

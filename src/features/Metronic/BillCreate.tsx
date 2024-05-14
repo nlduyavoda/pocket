@@ -3,13 +3,14 @@ import { Form, Input, DatePicker, Select } from "antd";
 import { Control, Controller, FieldValues } from "react-hook-form";
 import { Category, EventPayment } from "@types/FirebaseSource";
 import { RequiredProps, withFormModal } from "@hocs/withFormModal";
+import { withFireBaseSource } from "@hocs/withFireBaseSource";
 
 type ComponentProps = {
   categories: Category[];
   events: EventPayment[];
 };
 
-const BillCreate = ({
+export const BillCreate = ({
   categories,
   events,
   control,
@@ -19,7 +20,7 @@ const BillCreate = ({
   control?: Control<FieldValues>;
 }) => {
   return (
-    <Form>
+    <>
       <FormItem label="Key" name="key">
         <Controller
           name="key"
@@ -34,7 +35,7 @@ const BillCreate = ({
           render={({ field }) => <Input {...field} />}
         />
       </FormItem>
-      <FormItem label="Date" name="createAt">
+      {/* <FormItem label="Date" name="createAt">
         <Controller
           name="createAt"
           control={control}
@@ -42,7 +43,7 @@ const BillCreate = ({
             return <DatePicker {...field} />;
           }}
         />
-      </FormItem>
+      </FormItem> */}
       <FormItem label="Event" name="eventId">
         <Controller
           name="eventId"
@@ -81,9 +82,11 @@ const BillCreate = ({
           )}
         />
       </FormItem>
-    </Form>
+    </>
   );
 };
+
+
 
 export const CreateFormModal = withFormModal<ComponentProps & RequiredProps>(
   BillCreate

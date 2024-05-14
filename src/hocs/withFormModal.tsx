@@ -1,8 +1,8 @@
 import { Modal, ModalProps } from "antd";
+import { ReactNode } from "react";
 import { Control, FieldValues, useForm, UseFormProps } from "react-hook-form";
 
 export type RequiredProps = {
-  title: string;
   open: boolean;
   onSubmit: (data: FieldValues) => void;
   onClose: () => void;
@@ -20,7 +20,6 @@ export const withFormModal = <T extends RequiredProps>(
     );
     return (
       <Modal
-        title={props.title}
         open={props.open}
         onOk={handleSubmit((data: FieldValues) => props.onSubmit(data))}
         onCancel={() => props.onClose()}

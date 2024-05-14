@@ -11,6 +11,7 @@ import {
   query,
   where,
   setDoc,
+  Timestamp,
 } from "firebase/firestore";
 import { fireStore } from "./FireBaseConfig";
 import {
@@ -199,6 +200,37 @@ export const addDocument_ = async ({
     return failResult;
   }
 };
+export const addBills = async ({
+  documentName,
+  data,
+}: Partial<AddDocumentType>): Promise<FetchResType> => {
+  try {
+    const docRef = await addDoc(collection(fireStore, "bills"), {
+      ...data,
+      createAt: Timestamp.fromDate(new Date(data.createAt)),
+    });
+    const res = await getRefDocument(docRef);
+    console.log("res", res);
+    const { data: result, status } = res as RefDocResponseType;
+    return {
+      status,
+      data: result,
+    };
+  } catch (error: unknown) {
+    const failResult: FetchResType = {
+      status: "fail",
+      data: null,
+      message: error,
+    };
+    if (!documentName) {
+      return await {
+        ...failResult,
+        message: "document's name is required",
+      };
+    }
+    return failResult;
+  }
+};
 
 export const findDocumentById_ = async ({
   documentName = EVENTS,
@@ -240,9 +272,45 @@ export const findDocumentById = async ({
     const docRef = doc(fireStore, documentName, eventId);
 
     const res = await getRefDocument(docRef);
-    console.log("res", res);
     return res;
   } catch (error) {
     return { status: "fail", data: null, message: "Error getting document" };
+  }
+};
+
+export const handleMonthChange = async (month: number, year: number) => {
+  // Define the start and end dates for the month
+
+  try {
+    const startDate = new Date(year, month - 1, 1);
+    const endDate = new Date(year, month, 0);
+    const collectionRef = collection(fireStore, "bills");
+    const q = query(
+      collectionRef,
+      where("createAt", ">=", startDate),
+      where("createAt", "<=", endDate)
+    );
+    const querySnapshot = await getDocs(q);
+    const result: Array<unknown> = [];
+    querySnapshot.forEach((doc) => {
+      if (doc.id) {
+        const data = doc.data();
+        result.push({ id: doc.id, ...data });
+      }
+    });
+    if (result.length > 0) {
+      return {
+        status: "ok",
+        data: result,
+      };
+    } else {
+      return {
+        status: "ok",
+        data: [],
+        message: "No documents found!",
+      };
+    }
+  } catch (error) {
+    console.log("error", error);
   }
 };
