@@ -1,3 +1,4 @@
+import { Payment } from "@api/type";
 import {
   ExpenseCategories,
   ExpenseProperties,
@@ -6,6 +7,24 @@ import {
 } from "@utils/variables";
 import { ColumnType, ColumnsType } from "antd/es/table";
 import { format } from "date-fns";
+import { SchemaKey, SchemaValue } from "./types";
+
+export const columnsSchema: { [K in SchemaKey]: SchemaValue } = {
+  name: "key",
+  price: "value",
+  category: "categoryId",
+  event: "eventId",
+  action: "action",
+};
+
+const initialPayment: Payment = {
+  id: "xtm8prEhj623qU54IZ6J",
+  value: "600",
+  key: "test11",
+  createAt: "05/14/2024",
+  eventId: "YPX1sLPLDtmJReYuXLjU",
+  categoryId: "4EIUjeguk2ATTulGcMbT",
+};
 
 export const dataSource = [
   {

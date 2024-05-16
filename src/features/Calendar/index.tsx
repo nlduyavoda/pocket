@@ -77,7 +77,7 @@ const PaymentCalendar = () => {
   );
 };
 
-const Footer = ({ selectedDate }) => {
+const Footer = ({ selectedDate }: { selectedDate: string }) => {
   const [isCreate, setIsCreate] = useState<boolean>(false);
   return (
     <div>
@@ -93,10 +93,6 @@ const Footer = ({ selectedDate }) => {
               Add payment
             </Button>
           </div>
-          {/* <div>
-            <Button onClick={() => setIsCreate(false)}>Close</Button>
-            <Button onClick={() => setIsCreate(false)}>Submit</Button>
-          </div> */}
         </div>
       )}
     </div>
