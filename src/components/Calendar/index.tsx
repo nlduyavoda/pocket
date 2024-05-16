@@ -1,46 +1,35 @@
-import { Calendar, CalendarProps } from "antd";
-import dayjs, { Dayjs } from "dayjs";
-import { dateCellRender, monthCellRender } from "./Calendar.subInterfaces";
+import { Bill } from "@types/FirebaseSource";
 import { DATE_TIME_FORMAT, formatDate } from "@utils/DateTime";
+import { Calendar } from "antd";
+import dayjs, { Dayjs } from "dayjs";
+import type { CellRenderInfo } from "rc-picker/lib/interface";
+import { dateCellRender, monthCellRender } from "./Calendar.subInterfaces";
 
 const CalendarInternal = ({
   onSelect,
-  selectedDate,
   payments,
 }: {
-  onSelect: unknown;
-  selectedDate: Date;
-  payments: {
-    createAt: any;
-  }[];
+  onSelect: (date: Dayjs, selectInfo: CellRenderInfo<Dayjs>) => void;
+  payments: Bill[] | null;
 }) => {
-  const cellRender: CalendarProps<Dayjs>["cellRender"] = (
-    current: Date,
-    info
-  ) => {
-    if (info.type === "date") {
+  const handleRenderCell = (date: Dayjs, info: CellRenderInfo<Dayjs>) => {
+    if (info.type === "date" && payments) {
       return dateCellRender(
-        current,
-        selectedDate,
-        payments.find((payment) => {
-          return payment.createAt === formatDate(current);
+        payments.filter((payment: Bill) => {
+          return formatDate(payment.createAt) === formatDate(date);
         }) || null
       );
     }
-    if (info.type === "month") return monthCellRender(current);
-    return info.originNode;
+    if (info.type === "month") return monthCellRender(date);
+    const origin = info.originNode as React.ReactNode;
+    return origin;
   };
-  const handlePanelChange: CalendarProps<Dayjs>["onPanelChange"] = (
-    date,
-    mode
-  ) => {
-    return dayjs(date).format(DATE_TIME_FORMAT);
-  };
+
   return (
     <Calendar
-      onPanelChange={handlePanelChange}
+      onPanelChange={(date, _) => dayjs(date).format(DATE_TIME_FORMAT)}
       onSelect={onSelect}
-      cellRender={cellRender}
+      cellRender={handleRenderCell}
     />
   );
 };

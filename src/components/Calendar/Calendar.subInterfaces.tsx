@@ -1,5 +1,6 @@
 import { Badge, BadgeProps, Tag } from "antd";
 import { Dayjs } from "dayjs";
+import { ReactNode } from "react";
 
 export const getListData = (value: Dayjs) => {
   let listData;
@@ -42,7 +43,7 @@ export const getMonthData = (value: Dayjs) => {
   }
 };
 
-export const monthCellRender = (value: Dayjs) => {
+export const monthCellRender = (value: Dayjs): React.ReactNode => {
   const num = getMonthData(value);
   return num ? (
     <div className="notes-month">
@@ -52,27 +53,20 @@ export const monthCellRender = (value: Dayjs) => {
   ) : null;
 };
 
-type Payment = {
-  categoryId: string;
-  createAt: {
-    seconds: number;
-    nanoseconds: number;
-  };
-  eventId: string;
-  id: string;
-  key: string;
-  value: string;
-};
+export const dateCellRender = (payments: any): React.ReactNode => {
+  const total = payments.reduce((acc, payment) => {
+    return acc + parseInt(payment.value) * 1000;
+  }, 0);
 
-export const dateCellRender = (
-  value: Dayjs,
-  selectedDate: Date,
-  payment: any
-) => {
+  const formatter = new Intl.NumberFormat("vi-VN", {
+    style: "currency",
+    currency: "VND",
+  });
+  const formatted = formatter.format(total); // "50,000.00 ₫"
   return (
-    payment && (
+    payments.length && (
       <Tag className="inline-flex w-full p-[8px] text-[18px]" color="magenta">
-        <div>{payment.value},000đ</div>
+        <div>{formatted}</div>
       </Tag>
     )
   );

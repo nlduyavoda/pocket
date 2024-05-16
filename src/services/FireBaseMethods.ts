@@ -1,3 +1,4 @@
+import { deleteDoc } from "firebase/firestore";
 import { formatDate } from "@utils/variables";
 import {
   DocumentData,
@@ -312,5 +313,25 @@ export const handleMonthChange = async (month: number, year: number) => {
     }
   } catch (error) {
     console.log("error", error);
+  }
+};
+
+export const removeDocument = async ({
+  collectionName,
+  docId,
+}: {
+  collectionName: string;
+  docId: string;
+}): Promise<FetchResType> => {
+  try {
+    const docRef = doc(fireStore, collectionName, docId);
+    await deleteDoc(docRef);
+    return {
+      status: "ok",
+      data: null,
+      message: "Document successfully deleted!",
+    };
+  } catch (error) {
+    return { status: "fail", data: null, message: "Error deleting document" };
   }
 };

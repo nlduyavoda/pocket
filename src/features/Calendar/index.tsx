@@ -1,60 +1,56 @@
 import { PlusOutlined } from "@ant-design/icons";
 import Calendar from "@components/Calendar";
-import Loading from "@components/Spin";
+import { LoadingLarge } from "@components/Spin";
 import FormCreate from "@features/Metronic/FormCreate.bill";
-import { handleMonthChange } from "@services/FireBaseMethods";
+import useQuery from "@hooks/useQuery";
 import { Bill } from "@types/FirebaseSource";
+import { handleMonthChange } from "@services/FireBaseMethods";
 import { DATE_TIME_FORMAT, formatDate } from "@utils/DateTime";
 import { Button } from "antd";
 import { format } from "date-fns";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import TableModal from "./TableModal";
 
-const PaymentCalendar = () => {
-  const [selectedDate, setSelectedDate] = useState<string>(
-    new Date().toISOString()
-  );
-  const [payments, setPayments] = useState<Bill[]>([]);
-  const [open, setOpen] = useState<boolean>(false);
-
-  const handleSelect = async (dateProps: any) => {
-    setSelectedDate(dateProps);
-    setOpen(true);
-  };
-  useEffect(() => {
-    async function getPayment() {
-      const { data } = await handleMonthChange(
-        new Date(selectedDate).getMonth() + 1,
-        new Date(selectedDate).getFullYear()
+const fetchingPayments = async (selectedDate: string) => {
+  const month = new Date(selectedDate).getMonth() + 1;
+  const year = new Date(selectedDate).getFullYear();
+  const { status, data } = await handleMonthChange(month, year);
+  if (status === "ok") {
+    for (let payment of data) {
+      const date = format(
+        new Date(payment.createAt.toDate()),
+        DATE_TIME_FORMAT
       );
-      for (const payment of data) {
-        const date = format(
-          new Date(payment.createAt.toDate()),
-          DATE_TIME_FORMAT
-        );
-        payment.createAt = date;
-      }
-      setPayments(data);
+      payment.createAt = date;
     }
-    getPayment();
-  }, [selectedDate]);
-  console.log(payments);
-  return (
-    <>
-      {payments.length > 0 ? (
-        <Calendar
-          onSelect={handleSelect}
-          selectedDate={selectedDate}
-          payments={payments}
-        />
-      ) : (
-        <Loading />
-      )}
+    return data;
+  } else return [];
+};
+const currentDate = new Date().toISOString();
+const PaymentCalendar = () => {
+  const [selectedDate, setSelectedDate] = useState<string | null>(null);
+  const { data, loading, error } = useQuery<Bill[], string>(
+    currentDate,
+    fetchingPayments
+  );
+
+  if (loading) return <LoadingLarge />;
+  if (error) return <div>Error</div>;
+  return data && data.length < 0 ? (
+    <div>empty payment</div>
+  ) : (
+    <div>
+      <Calendar
+        onSelect={(dateProps: any) => {
+          setSelectedDate(dateProps);
+        }}
+        payments={data}
+      />
       {selectedDate && (
         <TableModal
-          bills={payments}
-          onClose={() => setOpen(false)}
-          open={open}
+          bills={data}
+          onClose={() => setSelectedDate(null)}
+          open={!!selectedDate}
           selectedDate={formatDate(selectedDate)}
           onSubmit={(params: unknown) => {
             return;
@@ -77,7 +73,7 @@ const PaymentCalendar = () => {
           }}
         />
       )}
-    </>
+    </div>
   );
 };
 

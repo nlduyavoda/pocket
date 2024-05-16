@@ -24,7 +24,7 @@ export type Bill = {
 };
 
 export type FirebaseSource = {
-  bills: Bill[];
+  bills: Bill[] | null;
   categories: Category[];
   events: EventPayment[];
 };

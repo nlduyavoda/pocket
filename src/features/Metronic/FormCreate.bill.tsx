@@ -3,12 +3,17 @@ import { addBills } from "@services/FireBaseMethods";
 import { Button } from "antd";
 import { useForm } from "react-hook-form";
 import { BillCreate } from "./BillCreate";
+import usePaymentMutate from "@hooks/usePaymentMutate";
+import { json } from "stream/consumers";
+import { FetchResType } from "@services/Types";
+import { createPayment } from "@services/PaymentMethods";
 
 interface FormValues {
   // Define your form fields here
 }
 
 const FormCreate = ({ categories, events, onClose, selectedDate }) => {
+  const { mutate, data, isLoading, error } = usePaymentMutate();
   const methods = useForm({
     defaultValues: {
       categoryId: "",
@@ -19,24 +24,9 @@ const FormCreate = ({ categories, events, onClose, selectedDate }) => {
     },
   });
   const handleSubmit = async (values: FormValues) => {
-    console.log(values);
-    // Handle form submission logic here
-    const { status, data, message } = await addBills({
-      data: values,
-      documentName: "bills",
-    });
-    console.log(status, data, message);
-    if (status === "ok") {
-      const responseData = JSON.parse(data);
-      console.log("responseData", responseData);
-      // const { startDate, endDate, title } = responseData;
-      // const event = {
-      //   title,
-      //   startDate: startDate,
-      //   endDate: endDate,
-      // };
-    } else {
-      console.log("onSubmit fail");
+    await mutate(values, createPayment);
+    if (data && !isLoading && !error) {
+      onClose();
     }
   };
 

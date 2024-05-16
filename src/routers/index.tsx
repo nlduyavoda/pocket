@@ -1,11 +1,9 @@
+import PaymentCalendar from "@features/Calendar";
+import { MetronicPage } from "@features/Metronic/metronic";
 import { EventDetail } from "@features/PaymentEvents/EventDetail";
 import { Events } from "@features/PaymentEvents/Events";
-import { PocketTable } from "@features/PocketTable";
 import { createBrowserRouter } from "react-router-dom";
 import { END_POINTS } from "./Endpoint";
-import { MetronicPage } from "@features/Metronic/metronic";
-import { TransactionDetail } from "@features/TransactionDetail";
-import PaymentCalendar from "@features/Calendar";
 export const routers = createBrowserRouter([
   // {
   //   path: END_POINTS.HOME,
