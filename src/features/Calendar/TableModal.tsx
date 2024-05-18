@@ -7,4 +7,5 @@ export type TableModalProps = { bills: Bill[] | null } & Partial<FirebaseSource>
     selectedDate: string;
   } & RequiredProps &
   ModalProps;
+  
 export default withFormModal<TableModalProps>(OverviewWithDataSource);

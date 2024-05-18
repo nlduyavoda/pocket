@@ -21,8 +21,7 @@ const CalendarInternal = ({
       );
     }
     if (info.type === "month") return monthCellRender(date);
-    const origin = info.originNode as React.ReactNode;
-    return origin;
+    return info.originNode;
   };
 
   return (

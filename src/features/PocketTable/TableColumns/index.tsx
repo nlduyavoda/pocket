@@ -1,7 +1,8 @@
 import { ColumnType } from "antd/es/table";
-import { ActionsColumn, BaseColumn } from "./Column.components";
 import { ColumnRenderType, SchemaKey, SchemaValue } from "../types";
 import { Payment } from "@api/type";
+import { Popconfirm } from "antd";
+import { DeleteTwoTone } from "@ant-design/icons";
 function formatCurrency(price: number) {
   const formatter = new Intl.NumberFormat("vi-VN", {
     style: "currency",
@@ -25,27 +26,27 @@ export const getTableColumns = (
   };
   const customColumns: ColumnRenderType = {
     name: (_: any, record: Payment) => (
-      <BaseColumn text={record[schemaKey as keyof Payment] + ""} />
+      <p className="text-[24px]">{record[schemaKey as keyof Payment] + ""}</p>
     ),
     price: (_: any, record: Payment) => (
-      <BaseColumn
-        text={formatCurrency(+(record[schemaKey as keyof Payment] || 0) * 1000)}
-      />
+      <p className="text-[24px]">
+        {formatCurrency(+(record[schemaKey as keyof Payment] || 0) * 1000)}
+      </p>
     ),
     action: (_: any, record: Payment) => (
-      <ActionsColumn id={record.id} onConfirm={() => onConfirm(record.id)} />
+      <Actions id={record.id} onConfirm={() => onConfirm(record.id)} />
     ),
     category: (_: any, record: Payment) => {
       const category: string =
         categories.find((ele: { id: string }) => ele?.id === record.categoryId)
           ?.key || "";
-      return <BaseColumn text={category} />;
+      return <p className="text-[24px]">{category}</p>;
     },
     event: (_: any, record: Payment) => {
       const event =
         events.find((ele: { id: string }) => ele?.id === record.eventId)
           ?.title || "";
-      return <BaseColumn text={event} />;
+      return <p className="text-[24px]">{event}</p>;
     },
   };
 
@@ -55,30 +56,28 @@ export const getTableColumns = (
   };
 };
 
-export const TableColumns = ({
-  categories,
-  events,
-  colSchema,
+export const Actions = ({
+  id,
   onConfirm,
-  record,
-}: any) => {
-  const [key, paymentKey] = colSchema;
-  if (key === "action") {
-    return (
-      <ActionsColumn id={record.id} onConfirm={() => onConfirm(record.id)} />
-    );
-  }
-  if (key === "category") {
-    const category: string =
-      categories.find((ele: { id: string }) => ele?.id === record.categoryId)
-        ?.key || "";
-    return <BaseColumn text={category} />;
-  }
-  if (key === "event") {
-    const event =
-      events.find((ele: { id: string }) => ele?.id === record.eventId)?.title ||
-      "";
-    return <BaseColumn text={event} />;
-  }
-  return <BaseColumn text={record[paymentKey]} />;
+}: {
+  id: string;
+  onConfirm: (id: string) => void;
+}) => {
+  return (
+    <div>
+      <Popconfirm
+        title="Title"
+        description={`Open Popconfirm with Promise ID: ${id}`}
+        onConfirm={() => onConfirm(id)}
+        onOpenChange={() => console.log("open change")}
+      >
+        <DeleteTwoTone
+          style={{
+            fontSize: "24px",
+          }}
+          twoToneColor="#eb2f96"
+        />
+      </Popconfirm>
+    </div>
+  );
 };

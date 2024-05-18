@@ -211,11 +211,10 @@ export const addBills = async ({
       createAt: Timestamp.fromDate(new Date(data.createAt)),
     });
     const res = await getRefDocument(docRef);
-    console.log("res", res);
-    const { data: result, status } = res as RefDocResponseType;
+    const { status } = res as RefDocResponseType;
     return {
       status,
-      data: result,
+      data: res.data,
     };
   } catch (error: unknown) {
     const failResult: FetchResType = {
@@ -279,7 +278,13 @@ export const findDocumentById = async ({
   }
 };
 
-export const handleMonthChange = async (month: number, year: number) => {
+export const handleMonthChange = async ({
+  month,
+  year,
+}: {
+  month: number;
+  year: number;
+}) => {
   // Define the start and end dates for the month
 
   try {

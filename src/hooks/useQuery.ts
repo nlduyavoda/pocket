@@ -4,6 +4,7 @@ type QueryResult<T> = {
   data: T | null;
   loading: boolean;
   error: Error | null;
+  setQueryData: (data: T) => void;
 };
 
 function useQuery<T, PropsType>(
@@ -13,7 +14,7 @@ function useQuery<T, PropsType>(
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<Error | null>(null);
-
+  const setQueryData = (data: T) => setData(data);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -29,7 +30,7 @@ function useQuery<T, PropsType>(
     fetchData();
   }, [dataProps, fetchFunction]);
 
-  return { data, loading, error };
+  return { data, loading, error, setQueryData };
 }
 
 export default useQuery;

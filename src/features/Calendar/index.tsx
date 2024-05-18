@@ -1,20 +1,18 @@
-import { PlusOutlined } from "@ant-design/icons";
 import Calendar from "@components/Calendar";
 import { LoadingLarge } from "@components/Spin";
-import FormCreate from "@features/Metronic/FormCreate.bill";
 import useQuery from "@hooks/useQuery";
-import { Bill } from "@types/FirebaseSource";
 import { handleMonthChange } from "@services/FireBaseMethods";
+import { Bill } from "@types/FirebaseSource";
 import { DATE_TIME_FORMAT, formatDate } from "@utils/DateTime";
-import { Button } from "antd";
 import { format } from "date-fns";
-import { useState } from "react";
+import { useId, useState } from "react";
+import { Footer } from "./Footer";
 import TableModal from "./TableModal";
 
 const fetchingPayments = async (selectedDate: string) => {
   const month = new Date(selectedDate).getMonth() + 1;
   const year = new Date(selectedDate).getFullYear();
-  const { status, data } = await handleMonthChange(month, year);
+  const { status, data } = await handleMonthChange({ month, year });
   if (status === "ok") {
     for (let payment of data) {
       const date = format(
@@ -26,14 +24,22 @@ const fetchingPayments = async (selectedDate: string) => {
     return data;
   } else return [];
 };
+
 const currentDate = new Date().toISOString();
+
 const PaymentCalendar = () => {
+  const id = useId();
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
-  const { data, loading, error } = useQuery<Bill[], string>(
+  const { data, loading, error, setQueryData } = useQuery<Bill[], string>(
     currentDate,
     fetchingPayments
   );
-
+  const handleUpdatePayment = (newPayment: unknown) => {
+    if (data && newPayment) {
+      const updatedData = [...data, { id, ...newPayment } as Bill];
+      setQueryData(updatedData);
+    }
+  };
   if (loading) return <LoadingLarge />;
   if (error) return <div>Error</div>;
   return data && data.length < 0 ? (
@@ -52,9 +58,6 @@ const PaymentCalendar = () => {
           onClose={() => setSelectedDate(null)}
           open={!!selectedDate}
           selectedDate={formatDate(selectedDate)}
-          onSubmit={(params: unknown) => {
-            return;
-          }}
           modalProps={{
             width: 1000,
             okButtonProps: {
@@ -68,32 +71,11 @@ const PaymentCalendar = () => {
             footer: (
               <Footer
                 selectedDate={format(new Date(selectedDate), DATE_TIME_FORMAT)}
+                updatePayment={handleUpdatePayment}
               />
             ),
           }}
         />
-      )}
-    </div>
-  );
-};
-
-const Footer = ({ selectedDate }: { selectedDate: string }) => {
-  const [isCreate, setIsCreate] = useState<boolean>(false);
-  return (
-    <div>
-      {isCreate ? (
-        <FormCreate
-          selectedDate={selectedDate}
-          onClose={() => setIsCreate(false)}
-        />
-      ) : (
-        <div className="flex w-full justify-between">
-          <div>
-            <Button icon={<PlusOutlined />} onClick={() => setIsCreate(true)}>
-              Add payment
-            </Button>
-          </div>
-        </div>
       )}
     </div>
   );

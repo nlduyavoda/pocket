@@ -9,12 +9,8 @@ const usePaymentMutate = () => {
       setIsLoading(true);
       const response: unknown = await onMutate(props);
       setData(response);
-      // Perform your payment mutation logic here
-      // e.g. make an API call to process the payment
-      // const response = await api.post('/payments', paymentData);
-      // Handle the response accordingly
-
       setIsLoading(false);
+      return response;
     } catch (err) {
       setIsLoading(false);
       setError(err);

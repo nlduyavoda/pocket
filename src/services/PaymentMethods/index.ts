@@ -6,7 +6,6 @@ export const createPayment = async (values: unknown) => {
     data: values,
     documentName: "bills",
   });
-
   const { data, status } = response as { data: string } & FetchResType;
   if (status === "ok") {
     return JSON.parse(data);
