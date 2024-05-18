@@ -2,12 +2,12 @@ import Calendar from "@components/Calendar";
 import { LoadingLarge } from "@components/Spin";
 import useQuery from "@hooks/useQuery";
 import { handleMonthChange } from "@services/FireBaseMethods";
-import { Bill } from "@types/FirebaseSource";
 import { DATE_TIME_FORMAT, formatDate } from "@utils/DateTime";
 import { format } from "date-fns";
 import { useId, useState } from "react";
 import { Footer } from "./Footer";
-import TableModal from "./TableModal";
+import TableModal from "@features/PocketTable/TableModal";
+import { Payment } from "Types/IPayment";
 
 const fetchingPayments = async (selectedDate: string) => {
   const month = new Date(selectedDate).getMonth() + 1;
@@ -30,13 +30,19 @@ const currentDate = new Date().toISOString();
 const PaymentCalendar = () => {
   const id = useId();
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
-  const { data, loading, error, setQueryData } = useQuery<Bill[], string>(
-    currentDate,
-    fetchingPayments
-  );
+  const { data, loading, error, setQueryData } = useQuery<
+    Payment[] | [],
+    string
+  >(currentDate, fetchingPayments);
   const handleUpdatePayment = (newPayment: unknown) => {
     if (data && newPayment) {
-      const updatedData = [...data, { id, ...newPayment } as Bill];
+      const updatedData = [...data, { id, ...newPayment } as Payment];
+      setQueryData(updatedData);
+    }
+  };
+  const handeDeletePayment = (id: string) => {
+    if (id) {
+      const updatedData = data.filter((payment) => payment.id !== id) || data;
       setQueryData(updatedData);
     }
   };
@@ -58,6 +64,7 @@ const PaymentCalendar = () => {
           onClose={() => setSelectedDate(null)}
           open={!!selectedDate}
           selectedDate={formatDate(selectedDate)}
+          onDeletePayment={handeDeletePayment}
           modalProps={{
             width: 1000,
             okButtonProps: {

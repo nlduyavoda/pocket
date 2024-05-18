@@ -1,21 +1,21 @@
-import { Bill } from "@types/FirebaseSource";
 import { DATE_TIME_FORMAT, formatDate } from "@utils/DateTime";
 import { Calendar } from "antd";
 import dayjs, { Dayjs } from "dayjs";
 import type { CellRenderInfo } from "rc-picker/lib/interface";
 import { dateCellRender, monthCellRender } from "./Calendar.subInterfaces";
+import { Payment } from "Types/IPayment";
 
 const CalendarInternal = ({
   onSelect,
   payments,
 }: {
   onSelect: (date: Dayjs, selectInfo: CellRenderInfo<Dayjs>) => void;
-  payments: Bill[] | null;
+  payments: Payment[] | null;
 }) => {
   const handleRenderCell = (date: Dayjs, info: CellRenderInfo<Dayjs>) => {
     if (info.type === "date" && payments) {
       return dateCellRender(
-        payments.filter((payment: Bill) => {
+        payments.filter((payment: Payment) => {
           return formatDate(payment.createAt) === formatDate(date);
         }) || null
       );

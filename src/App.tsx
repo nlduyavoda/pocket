@@ -1,14 +1,15 @@
 import React from "react";
 import { RouterProvider } from "react-router-dom";
 import { routers } from "./routers";
+import RootLayout from "@layouts/RootLayout";
 
 function App() {
   // TODO: Replace the following with your app's Firebase project configuration
   return (
     <React.StrictMode>
-      <div className="App h-screen w-screen inline-flex justify-center items-center">
+      <RootLayout>
         <RouterProvider router={routers} />
-      </div>
+      </RootLayout>
     </React.StrictMode>
   );
 }

@@ -1,3 +1,5 @@
+import { Payment } from "./IPayment";
+
 export type CustomType = {
   dataIndex: string;
   fixed: "left" | undefined;
@@ -24,7 +26,7 @@ export type Bill = {
 };
 
 export type FirebaseSource = {
-  bills: Bill[] | null;
+  bills: Payment[] | null;
   categories: Category[];
   events: EventPayment[];
 };
