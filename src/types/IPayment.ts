@@ -24,3 +24,5 @@ export type TableModalProps = Partial<FirebaseSource> & {
   onDeletePayment: (id: string) => void;
 } & RequiredProps &
   ModalProps;
+
+export type IColumnSchemaObject = { [K in SchemaKey]: SchemaValue };

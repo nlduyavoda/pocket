@@ -24,11 +24,23 @@ export const TableModal = withFireBaseSource(
       onDeletePayment(paymentId);
     };
 
-    const columns: ColumnsType<Payment> = Object.entries(columnsSchema).map(
-      (value: any) => getTableColumns(value, categories, events, handleDelete)
+    const columns: ColumnsType<Payment> = getTableColumns(
+      columnsSchema,
+      categories,
+      events,
+      handleDelete
     );
 
-    return <Table dataSource={dataSource} columns={columns} bordered />;
+    return (
+      <Table
+        dataSource={dataSource}
+        columns={columns}
+        bordered
+        scroll={{
+          y: 400,
+        }}
+      />
+    );
   },
   ["categories", "events"]
 );

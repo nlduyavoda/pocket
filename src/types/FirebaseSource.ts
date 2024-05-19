@@ -9,6 +9,7 @@ export type CustomType = {
 };
 
 export type Category = { id: string; key: string };
+
 export type EventPayment = {
   endDate: string;
   startDate: string;
