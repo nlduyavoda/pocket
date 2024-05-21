@@ -1,84 +1,158 @@
+import { CreditCardOutlined, DollarOutlined } from "@ant-design/icons";
+import { ButtonSuccess } from "@components/Button";
 import { withFireBaseSource } from "@hocs/withFireBaseSource";
-import { Button, Form, Input, Select } from "antd";
+import { withHookForm } from "@hocs/withHookForm";
+import { Category, EventPayment } from "Types/FirebaseSource";
+import { IFormHookProps } from "Types/IPayment";
+import { Button, Flex, Form, Input, Select } from "antd";
+import { ReactNode, useEffect } from "react";
 import { Controller, useFormContext } from "react-hook-form";
-import { withFormCreate } from "../../hocs/withFormCreate";
+
+const SelectText = ({ children }: { children: ReactNode }) => {
+  return <p className="flex text-[18px]">{children}</p>;
+};
 
 const FormItem = ({
-  label,
   name,
   children,
 }: {
-  label?: string;
   name?: string;
   children: React.ReactNode;
 }) => {
   return (
-    <Form.Item label={label} name={name}>
+    <Form.Item
+      labelCol={{ offset: 0, span: 5 }}
+      wrapperCol={{ offset: 0, span: 24 }}
+      style={{ width: "calc(50% - 20px)" }}
+      name={name}
+      colon={false}
+    >
       {children}
     </Form.Item>
   );
 };
 
-const FormCreate = withFormCreate(
-  ({ categories, events, onClose, onMutate }: any) => {
-    const { control, handleSubmit } = useFormContext();
-    const onSubmit = (values: any) => onMutate(values);
+const FormCreate = withHookForm<IFormHookProps>(
+  ({ categories, events, onClose, onSubmit }: any) => {
+    const { control, handleSubmit, reset, setFocus } = useFormContext();
+    const defaultStyle = {
+      backgroundColor: "#f9f9f9",
+      padding: "10px",
+      borderRadius: "5px",
+      marginBottom: "10px",
+    };
+
+    const handleSetFocus = (fieldName: string) => setFocus(fieldName);
+
+    useEffect(() => {
+      handleSetFocus("key");
+    }, []);
+
     return (
-      <Form onFinish={handleSubmit(onSubmit)}>
-        <FormItem label="Key" name="key">
+      <Form
+        style={defaultStyle}
+        onFinish={handleSubmit((data, event) => {
+          handleSetFocus("key");
+          onSubmit(data);
+          reset();
+        })}
+      >
+        <Flex justify="space-between" wrap="wrap" gap={20}>
+          <FormItem name="key">
+            <Controller
+              name="key"
+              control={control}
+              render={({ field }) => (
+                <Input
+                  {...field}
+                  style={{
+                    height: 50,
+                    fontSize: 18,
+                  }}
+                  placeholder="Payment's name"
+                  prefix={<CreditCardOutlined />}
+                />
+              )}
+            />
+          </FormItem>
+          <FormItem name="value">
+            <Controller
+              name="value"
+              control={control}
+              render={({ field }) => (
+                <Input
+                  {...field}
+                  defaultValue={field.value}
+                  style={{
+                    height: 50,
+                    fontSize: 18,
+                  }}
+                  placeholder="Price"
+                  prefix={<DollarOutlined />}
+                />
+              )}
+            />
+          </FormItem>
           <Controller
-            name="key"
+            name="createAt"
             control={control}
-            render={({ field }) => <Input {...field} />}
+            render={({ field }) => <Input type="hidden" {...field} />}
           />
-        </FormItem>
-        <FormItem label="Value" name="value">
-          <Controller
-            name="value"
-            control={control}
-            render={({ field }) => <Input {...field} />}
-          />
-        </FormItem>
-        <FormItem label="Event" name="eventId">
-          <Controller
-            name="eventId"
-            control={control}
-            render={({ field }) => (
-              <Select {...field}>
-                {events.map((event) => {
-                  return (
-                    <Select.Option key={event.id} value={event.id}>
-                      {event.title}
-                    </Select.Option>
-                  );
-                })}
-                <Select.Option value="event3">add more option +</Select.Option>
-                {/* Add more options as needed */}
-              </Select>
-            )}
-          />
-        </FormItem>
-        <FormItem label="Category" name="categoryId">
-          <Controller
-            name="categoryId"
-            control={control}
-            render={({ field }) => (
-              <Select {...field}>
-                {categories.map((cate) => {
-                  return (
-                    <Select.Option key={cate.id} value={cate.id}>
-                      {cate.key}
-                    </Select.Option>
-                  );
-                })}
-                <Select.Option value="event3">add more option +</Select.Option>
-                {/* Add more options as needed */}
-              </Select>
-            )}
-          />
-        </FormItem>
-        <Button htmlType="submit">Submit</Button>
-        <Button onClick={onClose}>Close</Button>
+          <FormItem name="eventId">
+            <Controller
+              name="eventId"
+              control={control}
+              render={({ field }) => (
+                <Select
+                  {...field}
+                  placeholder="Select event"
+                  style={{ width: "100%", height: 50 }}
+                  options={[
+                    {
+                      value: "",
+                      label: <SelectText>Select event</SelectText>,
+                    },
+                    ...events.map((event: EventPayment) => {
+                      return {
+                        value: event.id,
+                        label: <SelectText>{event.title}</SelectText>,
+                      };
+                    }),
+                  ]}
+                />
+              )}
+            />
+          </FormItem>
+          <FormItem name="categoryId">
+            <Controller
+              name="categoryId"
+              control={control}
+              render={({ field }) => (
+                <Select
+                  {...field}
+                  style={{ width: "100%", height: 50 }}
+                  placeholder="Select category"
+                  options={[
+                    {
+                      value: "",
+                      label: <SelectText>Select category</SelectText>,
+                    },
+                    ...categories.map((cate: Category) => {
+                      return {
+                        value: cate.id,
+                        label: <SelectText>{cate.key}</SelectText>,
+                      };
+                    }),
+                  ]}
+                />
+              )}
+            />
+          </FormItem>
+        </Flex>
+        <Flex justify="space-between">
+          <Button onClick={onClose}>Close</Button>
+          <ButtonSuccess htmlType="submit">Submit</ButtonSuccess>
+        </Flex>
       </Form>
     );
   }

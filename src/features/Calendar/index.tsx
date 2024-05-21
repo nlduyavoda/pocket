@@ -1,91 +1,106 @@
+import { PlusOutlined } from "@ant-design/icons";
 import Calendar from "@components/Calendar";
-import { LoadingLarge } from "@components/Spin";
-import useQuery from "@hooks/useQuery";
-import { handleMonthChange } from "@services/FireBaseMethods";
-import { DATE_TIME_FORMAT, formatDate } from "@utils/DateTime";
-import { format } from "date-fns";
-import { useId, useState } from "react";
-import { Footer } from "./Footer";
+import FormCreate from "@features/Metronic/FormCreate";
 import TableModal from "@features/PocketTable/TableModal";
-import { Payment } from "Types/IPayment";
+import withPaymentMethods from "@hocs/withPaymentMethods";
+import { formatDate } from "@utils/DateTime";
+import { IWithPaymentMethodsProps, Payment } from "Types/IPayment";
+import { Button, ModalProps } from "antd";
+import { useEffect, useState } from "react";
 
-const fetchingPayments = async (selectedDate: string) => {
-  const month = new Date(selectedDate).getMonth() + 1;
-  const year = new Date(selectedDate).getFullYear();
-  const { status, data } = await handleMonthChange({ month, year });
-  if (status === "ok") {
-    for (let payment of data) {
-      const date = format(
-        new Date(payment.createAt.toDate()),
-        DATE_TIME_FORMAT
-      );
-      payment.createAt = date;
-    }
-    return data;
-  } else return [];
+export default withPaymentMethods(
+  ({
+    onDelete,
+    onCreate,
+    onSelect,
+    calendarData,
+    dataSourceFilterByDate,
+  }: IWithPaymentMethodsProps & { dataSourceFilterByDate: any }) => {
+    const { selectedDate, dataSource } = dataSourceFilterByDate;
+    return (
+      <div>
+        <Calendar onSelect={onSelect} payments={calendarData} />
+        {selectedDate && (
+          <TableModal
+            dataSource={dataSource}
+            onClose={() => onSelect(null)}
+            open={!!selectedDate}
+            selectedDate={formatDate(selectedDate)}
+            onDeletePayment={onDelete}
+            modalProps={getModalProps({
+              date: selectedDate,
+              handleCreatePayment: onCreate,
+            })}
+          />
+        )}
+      </div>
+    );
+  }
+);
+
+const getModalProps = ({
+  date,
+  handleCreatePayment,
+}: {
+  date: string;
+  handleCreatePayment: (newPayment: Payment) => void;
+}) => {
+  return {
+    width: 1000,
+    okButtonProps: {
+      type: "primary",
+    },
+    title: <h1>Current date: {date}</h1>,
+    footer: (
+      <Footer
+        render={({ onClose }: { onClose: () => void }) => {
+          const defaultFormValues = {
+            key: "",
+            value: "",
+            eventId: "",
+            categoryId: "",
+            createAt: date,
+          };
+          return (
+            <FormCreate
+              onSubmit={handleCreatePayment}
+              onClose={onClose}
+              defaultValues={defaultFormValues}
+            />
+          );
+        }}
+      />
+    ),
+  } as ModalProps;
 };
 
-const currentDate = new Date().toISOString();
-
-const PaymentCalendar = () => {
-  const id = useId();
-  const [selectedDate, setSelectedDate] = useState<string | null>(null);
-  const { data, loading, error, setQueryData } = useQuery<
-    Payment[] | [],
-    string
-  >(currentDate, fetchingPayments);
-  const handleUpdatePayment = (newPayment: unknown) => {
-    if (data && newPayment) {
-      const updatedData = [...data, { id, ...newPayment } as Payment];
-      setQueryData(updatedData);
-    }
-  };
-  const handeDeletePayment = (id: string) => {
-    if (id) {
-      const updatedData = data.filter((payment) => payment.id !== id) || data;
-      setQueryData(updatedData);
-    }
-  };
-  if (loading) return <LoadingLarge />;
-  if (error) return <div>Error</div>;
-  return data && data.length < 0 ? (
-    <div>empty payment</div>
-  ) : (
+const Footer = (props: any) => {
+  const [isCreate, setIsCreate] = useState<boolean>(false);
+  useEffect(() => {
+    const handleKeydown = (event: any) => {
+      if (event.key === "Enter") {
+        setIsCreate(true);
+      }
+    };
+    const documentEvent = document.addEventListener("keydown", handleKeydown);
+    return () => {
+      return documentEvent;
+    };
+  }, []);
+  return (
     <div>
-      <Calendar
-        onSelect={(dateProps: any) => {
-          setSelectedDate(dateProps);
-        }}
-        payments={data}
-      />
-      {selectedDate && (
-        <TableModal
-          bills={data}
-          onClose={() => setSelectedDate(null)}
-          open={!!selectedDate}
-          selectedDate={formatDate(selectedDate)}
-          onDeletePayment={handeDeletePayment}
-          modalProps={{
-            width: 1000,
-            okButtonProps: {
-              type: "primary",
-            },
-            title: (
-              <h1>
-                Current date: {format(new Date(selectedDate), DATE_TIME_FORMAT)}
-              </h1>
-            ),
-            footer: (
-              <Footer
-                selectedDate={format(new Date(selectedDate), DATE_TIME_FORMAT)}
-                updatePayment={handleUpdatePayment}
-              />
-            ),
-          }}
-        />
+      {isCreate ? (
+        props.render({ onClose: () => setIsCreate(false) }) // Remove unnecessary arrow function syntax
+      ) : (
+        <div className="flex w-full justify-between">
+          <div>
+            <Button icon={<PlusOutlined />} onClick={() => setIsCreate(true)}>
+              Add payment
+            </Button>
+          </div>
+        </div>
       )}
     </div>
   );
 };
 
-export default PaymentCalendar;

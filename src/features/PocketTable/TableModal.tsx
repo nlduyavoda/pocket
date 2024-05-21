@@ -8,17 +8,8 @@ import { withFormModal } from "@hocs/withFormModal";
 import { Payment, TableModalProps } from "Types/IPayment";
 
 export const TableModal = withFireBaseSource(
-  ({
-    categories,
-    events,
-    bills,
-    selectedDate,
-    onDeletePayment,
-  }: TableModalProps) => {
+  ({ categories, events, dataSource, onDeletePayment }: TableModalProps) => {
     const { mutate } = usePaymentMutate();
-    const dataSource = bills?.filter(
-      ({ createAt }: Pick<Payment, "createAt">) => createAt === selectedDate
-    );
     const handleDelete = async (paymentId: string) => {
       await mutate(paymentId, deletePayment);
       onDeletePayment(paymentId);
@@ -33,7 +24,7 @@ export const TableModal = withFireBaseSource(
 
     return (
       <Table
-        dataSource={dataSource}
+        dataSource={dataSource || []}
         columns={columns}
         bordered
         scroll={{

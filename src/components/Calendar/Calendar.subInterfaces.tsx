@@ -1,6 +1,5 @@
-import { Badge, BadgeProps, Tag } from "antd";
+import { Tag } from "antd";
 import { Dayjs } from "dayjs";
-import { ReactNode } from "react";
 
 export const getListData = (value: Dayjs) => {
   let listData;
@@ -33,18 +32,16 @@ export const getListData = (value: Dayjs) => {
   return listData || [];
 };
 
-const getDayTotalPrice = (payments) => {
-  return 200;
-};
-
-export const getMonthData = (value: Dayjs) => {
-  if (value.month() === 8) {
+export const getMonthData = (value: unknown) => {
+  const date = value as Dayjs;
+  if (date.month() === 8) {
     return 1394;
   }
 };
 
-export const monthCellRender = (value: Dayjs): React.ReactNode => {
-  const num = getMonthData(value);
+export const monthCellRender = (value: unknown): React.ReactNode => {
+  const date = value as Dayjs;
+  const num = getMonthData(date);
   return num ? (
     <div className="notes-month">
       <section>{num}</section>

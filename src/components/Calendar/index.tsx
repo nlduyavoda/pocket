@@ -1,18 +1,17 @@
 import { DATE_TIME_FORMAT, formatDate } from "@utils/DateTime";
+import { Payment } from "Types/IPayment";
 import { Calendar } from "antd";
 import dayjs, { Dayjs } from "dayjs";
-import type { CellRenderInfo } from "rc-picker/lib/interface";
 import { dateCellRender, monthCellRender } from "./Calendar.subInterfaces";
-import { Payment } from "Types/IPayment";
 
 const CalendarInternal = ({
   onSelect,
   payments,
 }: {
-  onSelect: (date: Dayjs, selectInfo: CellRenderInfo<Dayjs>) => void;
+  onSelect: (date: string) => void;
   payments: Payment[] | null;
 }) => {
-  const handleRenderCell = (date: Dayjs, info: CellRenderInfo<Dayjs>) => {
+  const handleRenderCell = (date: unknown, info: any) => {
     if (info.type === "date" && payments) {
       return dateCellRender(
         payments.filter((payment: Payment) => {
@@ -23,11 +22,17 @@ const CalendarInternal = ({
     if (info.type === "month") return monthCellRender(date);
     return info.originNode;
   };
+  const handleSelectDate = (date: unknown, selectInfo: any) => {
+    const dateFormat = formatDate(date);
+    return onSelect(dateFormat);
+  };
 
   return (
     <Calendar
-      onPanelChange={(date, _) => dayjs(date).format(DATE_TIME_FORMAT)}
-      onSelect={onSelect}
+      onPanelChange={(date: unknown, _) => {
+        return dayjs(date as Dayjs).format(DATE_TIME_FORMAT);
+      }}
+      onSelect={handleSelectDate}
       cellRender={handleRenderCell}
     />
   );

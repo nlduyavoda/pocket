@@ -9,6 +9,7 @@ import {
   SchemaValue,
   IColumnSchemaObject,
 } from "Types/IPayment";
+import { ReactNode } from "react";
 
 function formatCurrency(price: number) {
   const formatter = new Intl.NumberFormat("vi-VN", {
@@ -24,68 +25,74 @@ export const getTableColumns = (
   events: EventPayment[] | undefined,
   onConfirm: (paymentId: string) => void
 ): ColumnsType<Payment> =>
-  Object.entries(columns).map((column) => {
-    const [key, schemaKey] = column as [SchemaKey, SchemaValue];
+  Object.entries(columns).map(([key, schemaKey]) => {
     const defaultColumns = {
       dataIndex: key,
       key,
       title: key,
       width: 100,
     };
+
     const customColumns: ColumnRenderType = {
-      name: (_: any, record: Payment) => (
-        <p className="text-[24px]">{record[schemaKey as keyof Payment] + ""}</p>
-      ),
-      price: (_: any, record: Payment) => (
+      name: (_, record: Payment) => (
         <p className="text-[24px]">
-          {formatCurrency(+(record[schemaKey as keyof Payment] || 0) * 1000)}
+          {String(record[schemaKey as keyof Payment])}
         </p>
       ),
-      action: (_: any, record: Payment) => (
-        <Actions id={record.id} onConfirm={() => onConfirm(record.id)} />
+      price: (_, record: Payment) => (
+        <p className="text-[24px]">
+          {formatCurrency(
+            Number(record[schemaKey as keyof Payment] || 0) * 1000
+          )}
+        </p>
       ),
-      category: (_: any, record: Payment) => {
-        const category: string =
-          categories?.find((ele: Category) => ele?.id === record.categoryId)
-            ?.key || "";
+      action: (_, record: Payment) => (
+        <Actions
+          id={record.id}
+          onConfirm={() => onConfirm(record.id)}
+          icon={
+            <DeleteTwoTone
+              style={{ fontSize: "24px" }}
+              twoToneColor="#3699ff"
+            />
+          }
+        />
+      ),
+      category: (_, record: Payment) => {
+        const category =
+          categories?.find((cat) => cat.id === record.categoryId)?.key || "";
         return <p className="text-[24px]">{category}</p>;
       },
-      event: (_: any, record: Payment) => {
+      event: (_, record: Payment) => {
         const event =
-          events?.find((ele: EventPayment) => ele?.id === record.eventId)
-            ?.title || "";
+          events?.find((evt) => evt.id === record.eventId)?.title || "";
         return <p className="text-[24px]">{event}</p>;
       },
     };
 
     return {
       ...defaultColumns,
-      render: customColumns[key],
+      render: customColumns[key as keyof ColumnRenderType],
     };
   });
 
 export const Actions = ({
   id,
   onConfirm,
+  icon,
 }: {
   id: string;
   onConfirm: (id: string) => void;
+  icon: ReactNode;
 }) => {
   return (
-    <div>
-      <Popconfirm
-        title="Title"
-        description={`Open Popconfirm with Promise ID: ${id}`}
-        onConfirm={() => onConfirm(id)}
-        onOpenChange={() => console.log("open change")}
-      >
-        <DeleteTwoTone
-          style={{
-            fontSize: "24px",
-          }}
-          twoToneColor="#eb2f96"
-        />
-      </Popconfirm>
-    </div>
+    <Popconfirm
+      title="Title"
+      description={`Open Popconfirm with Promise ID: ${id}`}
+      onConfirm={() => onConfirm(id)}
+      onOpenChange={() => console.log("open change")}
+    >
+      {icon}
+    </Popconfirm>
   );
 };

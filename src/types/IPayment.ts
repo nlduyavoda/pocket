@@ -1,5 +1,5 @@
 import { RequiredProps } from "@hocs/withFormModal";
-import { FirebaseSource } from "./FirebaseSource";
+import { Category, EventPayment, FirebaseSource } from "./FirebaseSource";
 import { ModalProps } from "antd";
 
 export type SchemaKey = "name" | "category" | "event" | "price" | "action";
@@ -26,3 +26,19 @@ export type TableModalProps = Partial<FirebaseSource> & {
   ModalProps;
 
 export type IColumnSchemaObject = { [K in SchemaKey]: SchemaValue };
+
+export type IFormHookProps = {
+  categories: Category[];
+  events: EventPayment[];
+  onClose: () => void;
+  onSubmit: (data: any) => void;
+  defaultValues: Record<string, any>;
+};
+
+export interface IWithPaymentMethodsProps {
+  onCreate: (newPayment: unknown) => void;
+  onDelete: (id: string) => void;
+  onSelect: (date: string | null) => void;
+  // selectedDate: string | null;
+  calendarData: Payment[] | [];
+}
