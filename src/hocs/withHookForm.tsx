@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 export const withHookForm = <T,>(Component: React.FC<T>) => {
@@ -5,9 +6,14 @@ export const withHookForm = <T,>(Component: React.FC<T>) => {
     const methods = useForm({
       defaultValues: props.defaultValues,
     });
+
+    useEffect(() => {
+      methods.reset(props.defaultValues);
+    }, [props.defaultValues, methods]);
+
     return (
       <FormProvider {...methods}>
-        <Component {...props} />;
+        <Component {...props} />
       </FormProvider>
     );
   };

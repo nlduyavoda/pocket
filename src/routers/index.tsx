@@ -1,4 +1,4 @@
-import PaymentCalendar from "@features/Calendar";
+import Calendar from "@features/Calendar";
 import { MetronicPage } from "@features/Metronic/metronic";
 import { EventDetail } from "@features/PaymentEvents/EventDetail";
 import { Events } from "@features/PaymentEvents/Events";
@@ -12,8 +12,8 @@ export const routers = createBrowserRouter([
   // },
   {
     path: END_POINTS.HOME,
-    element: <PaymentCalendar />,
-    errorElement: <>Error</>,
+    element: <Calendar />,
+    errorElement: <>PaymentCalendar Error</>,
   },
   {
     path: END_POINTS.TRANSACTION,

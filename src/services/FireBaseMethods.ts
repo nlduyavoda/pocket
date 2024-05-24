@@ -1,18 +1,18 @@
-import { deleteDoc } from "firebase/firestore";
 import { formatDate } from "@utils/variables";
 import {
   DocumentData,
   DocumentReference,
+  Timestamp,
   addDoc,
   collection,
+  deleteDoc,
   doc,
   getDoc,
-  getDocFromCache,
   getDocs,
   query,
-  where,
   setDoc,
-  Timestamp,
+  updateDoc,
+  where,
 } from "firebase/firestore";
 import { fireStore } from "./FireBaseConfig";
 import {
@@ -23,29 +23,6 @@ import {
   GetCollection,
 } from "./Types";
 import { EVENTS, TRANSACTIONS } from "./utils";
-
-const formatDocumentSnap = (snap: any) => {
-  const result: Array<unknown> = [];
-  snap.forEach((doc: any) => {
-    console.log("doc", doc);
-    if (doc.id) {
-      const data = doc.data();
-      result.push({ id: doc.id, ...data });
-    }
-  });
-
-  if (result.length > 0) {
-    return {
-      status: "ok",
-      data: result,
-    };
-  } else {
-    return {
-      status: "fail",
-      data: [],
-    };
-  }
-};
 
 export const addCollection = async ({
   collectionName = "",
@@ -99,6 +76,24 @@ export const findDocumentsByDate = async ({
   }
 };
 
+export const getCollection_clone = async ({
+  collectionName,
+}: {
+  collectionName: string;
+}) => {
+  try {
+    const querySnapshot = await getDocs(collection(fireStore, collectionName));
+    const docsData = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    return docsData;
+  } catch (err) {
+    console.error(`Error fetching collection: ${collectionName}`, err);
+    return err;
+  }
+};
+
 export const getCollection = async ({
   collectionName = TRANSACTIONS,
 }: GetCollection): Promise<FetchResType> => {
@@ -126,6 +121,7 @@ export const getCollection = async ({
       };
     }
   } catch (error) {
+    console.error(`Error getting documents: ${collectionName}`, error);
     return {
       status: "fail",
       data: [],
@@ -201,7 +197,8 @@ export const addDocument_ = async ({
     return failResult;
   }
 };
-export const addBills = async ({
+
+export const createPayment = async ({
   documentName,
   data,
 }: Partial<AddDocumentType>): Promise<FetchResType> => {
@@ -210,11 +207,10 @@ export const addBills = async ({
       ...data,
       createAt: Timestamp.fromDate(new Date(data.createAt)),
     });
-    const res = await getRefDocument(docRef);
-    const { status } = res as RefDocResponseType;
+    const res: FetchResType = await getRefDocument(docRef);
     return {
-      status,
-      data: res.data,
+      status: res.status,
+      data: res.status === "ok" ? JSON.parse(res.data) : [],
     };
   } catch (error: unknown) {
     const failResult: FetchResType = {
@@ -229,6 +225,20 @@ export const addBills = async ({
       };
     }
     return failResult;
+  }
+};
+
+export const updatePayment = async ({
+  docId = "",
+  data,
+}: AddDocumentType): Promise<FetchResType> => {
+  try {
+    const docRef = doc(fireStore, "bills", docId);
+    data.createAt = Timestamp.fromDate(new Date(data.createAt));
+     await updateDoc(docRef, data);
+    return { status: "ok", data };
+  } catch (error) {
+    return { status: "fail", data };
   }
 };
 
@@ -288,13 +298,10 @@ export const handleMonthChange = async ({
   // Define the start and end dates for the month
 
   try {
-    const startDate = new Date(year, month - 1, 1);
-    const endDate = new Date(year, month, 0);
-    const collectionRef = collection(fireStore, "bills");
     const q = query(
-      collectionRef,
-      where("createAt", ">=", startDate),
-      where("createAt", "<=", endDate)
+      collection(fireStore, "bills"),
+      where("createAt", ">=", new Date(year, month - 1, 1)),
+      where("createAt", "<=", new Date(year, month, 0))
     );
     const querySnapshot = await getDocs(q);
     const result: Array<unknown> = [];

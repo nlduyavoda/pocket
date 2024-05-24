@@ -31,3 +31,27 @@ export type FirebaseSource = {
   categories: Category[];
   events: EventPayment[];
 };
+
+export type QueryResult = {
+  data: IDataSouces;
+  loading: boolean;
+  error: any;
+};
+
+export type IDataSouces = {
+  bills: Payment[] | null;
+  categories: Category[];
+  events: EventPayment[];
+};
+
+export type QueryOptions = {
+  url: string;
+  method?: string;
+  headers?: Record<string, string>;
+  body?: any;
+};
+
+export type IQuery = {
+  sourceName: string;
+  fetchFunction: () => Promise<Response>;
+};

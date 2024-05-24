@@ -13,13 +13,14 @@ export type GetCollection = {
 
 export type AddDocumentType = {
   documentName: string;
-  data: unknown;
+  data: {[key: string]: any}[] | never[];
   message: string;
+  docId?: string;
 };
 
 export type FetchResType = {
   status: "ok" | "fail";
-  data: unknown;
+  data: { [key: string]: any }[] | never[];
   message?: string | unknown;
 };
 

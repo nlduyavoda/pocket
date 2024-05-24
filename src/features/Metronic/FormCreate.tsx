@@ -32,16 +32,16 @@ const FormItem = ({
   );
 };
 
+const defaultStyle = {
+  backgroundColor: "#f9f9f9",
+  padding: "10px",
+  borderRadius: "5px",
+  marginBottom: "10px",
+};
+
 const FormCreate = withHookForm<IFormHookProps>(
   ({ categories, events, onClose, onSubmit }: any) => {
     const { control, handleSubmit, reset, setFocus } = useFormContext();
-    const defaultStyle = {
-      backgroundColor: "#f9f9f9",
-      padding: "10px",
-      borderRadius: "5px",
-      marginBottom: "10px",
-    };
-
     const handleSetFocus = (fieldName: string) => setFocus(fieldName);
 
     useEffect(() => {

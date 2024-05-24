@@ -10,14 +10,14 @@ export const withFireBaseSource = <T,>(
     const { data, isLoading, isError } = useFirebaseSource(() =>
       getPaymentSource(documents)
     ) as { data: unknown; isLoading: boolean; isError: boolean };
+
     if (isLoading) return <Loading />;
     if (isError) return <div>error</div>;
-    return data ? (
+
+    return (
       <div className="flex-wrap overflow-auto">
-        <Component {...props} {...data} />
+        <Component {...props} />
       </div>
-    ) : (
-      <>empty data</>
     );
   };
 };

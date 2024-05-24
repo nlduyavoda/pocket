@@ -1,35 +1,39 @@
 import { PlusOutlined } from "@ant-design/icons";
 import Calendar from "@components/Calendar";
 import FormCreate from "@features/Metronic/FormCreate";
-import TableModal from "@features/PocketTable/TableModal";
+import PaymentsSelected from "@features/PocketTable/PaymentsSelected";
 import withPaymentMethods from "@hocs/withPaymentMethods";
+import useDateMethods from "@hooks/useDateMethods";
 import { formatDate } from "@utils/DateTime";
-import { IWithPaymentMethodsProps, Payment } from "Types/IPayment";
+import { Payment } from "Types/IPayment";
 import { Button, ModalProps } from "antd";
 import { useEffect, useState } from "react";
 
 export default withPaymentMethods(
-  ({
-    onDelete,
-    onCreate,
-    onSelect,
-    calendarData,
-    dataSourceFilterByDate,
-  }: IWithPaymentMethodsProps & { dataSourceFilterByDate: any }) => {
-    const { selectedDate, dataSource } = dataSourceFilterByDate;
+  ({ onSetSelectedDate, originalData }: any) => {
+    const {
+      selectedDate,
+      selectedDataSource,
+      handleDelete,
+      handleCreate,
+      // handleUpdate,
+      handleSelect,
+    } = useDateMethods({ dataSource: originalData });
+
     return (
       <div>
-        <Calendar onSelect={onSelect} payments={calendarData} />
+        <Calendar onSelect={handleSelect} dataSource={originalData} />
         {selectedDate && (
-          <TableModal
-            dataSource={dataSource}
-            onClose={() => onSelect(null)}
+          <PaymentsSelected
+            dataSource={selectedDataSource}
+            onClose={() => handleSelect(null)}
             open={!!selectedDate}
             selectedDate={formatDate(selectedDate)}
-            onDeletePayment={onDelete}
+            onDelete={handleDelete}
             modalProps={getModalProps({
               date: selectedDate,
-              handleCreatePayment: onCreate,
+              handleCreatePayment: handleCreate,
+              dataSource: originalData,
             })}
           />
         )}
@@ -38,12 +42,22 @@ export default withPaymentMethods(
   }
 );
 
+const defaultFormValues = {
+  key: "",
+  value: "",
+  eventId: "",
+  categoryId: "",
+  createAt: "",
+};
+
 const getModalProps = ({
   date,
   handleCreatePayment,
+  dataSource,
 }: {
   date: string;
   handleCreatePayment: (newPayment: Payment) => void;
+  dataSource: any;
 }) => {
   return {
     width: 1000,
@@ -54,18 +68,15 @@ const getModalProps = ({
     footer: (
       <Footer
         render={({ onClose }: { onClose: () => void }) => {
-          const defaultFormValues = {
-            key: "",
-            value: "",
-            eventId: "",
-            categoryId: "",
-            createAt: date,
-          };
           return (
             <FormCreate
               onSubmit={handleCreatePayment}
               onClose={onClose}
-              defaultValues={defaultFormValues}
+              defaultValues={{
+                ...defaultFormValues,
+                createAt: date,
+              }}
+              dataSource={dataSource}
             />
           );
         }}

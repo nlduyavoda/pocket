@@ -6,15 +6,15 @@ import { dateCellRender, monthCellRender } from "./Calendar.subInterfaces";
 
 const CalendarInternal = ({
   onSelect,
-  payments,
+  dataSource,
 }: {
   onSelect: (date: string) => void;
-  payments: Payment[] | null;
+  dataSource: Payment[] | null;
 }) => {
   const handleRenderCell = (date: unknown, info: any) => {
-    if (info.type === "date" && payments) {
+    if (info.type === "date" && dataSource) {
       return dateCellRender(
-        payments.filter((payment: Payment) => {
+        dataSource.filter((payment: Payment) => {
           return formatDate(payment.createAt) === formatDate(date);
         }) || null
       );
